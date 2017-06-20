@@ -2,6 +2,8 @@ package org;
 
 import org.services.Command;
 
+import org.services.checker.Check;
+import org.services.checker.CommandCheckDefinition;
 import org.services.CommandDefinition;
 
 import java.util.HashMap;
@@ -24,8 +26,12 @@ public class PhoneBookApplication {
 
     public void run(String args[]){
         String commandName = args[0];
+        CommandCheckDefinition commandCheckDefinition;
         try{
             Command  command = commandDefinitionMap.get(commandName).getCommand().newInstance();
+            commandCheckDefinition = new CommandCheckDefinition(command);
+            Check check  = commandCheckDefinition.getCheckClass().newInstance();
+            check.check();
             command.execute();
 
         }catch (NullPointerException e){

@@ -6,7 +6,7 @@ import org.parsing.ParseArguments;
 
 import java.util.ArrayList;
 
-public class CommandAddDefinition {
+public class AddCommandReceiver {
 
     private ArrayList<Data> person = new ArrayList<Data>();
 

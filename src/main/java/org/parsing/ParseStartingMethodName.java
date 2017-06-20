@@ -2,7 +2,7 @@ package org.parsing;
 
 import org.services.Command;
 import org.services.add.AddCommandImpl;
-import org.services.add.CommandAddDefinition;
+import org.services.add.AddCommandReceiver;
 import org.services.find.CommandFindDefinition;
 import org.services.find.FindCommandImpl;
 import org.services.help.CommandDefinitionToHelp;
@@ -35,9 +35,9 @@ public class ParseStartingMethodName {
                     System.exit(0);
                 } else {
                     if (arguments[0].equals("add")) {
-                        CommandAddDefinition commandAddDefinition = new CommandAddDefinition();
+                        AddCommandReceiver addCommandReceiver = new AddCommandReceiver();
                         ParseArguments parseArguments = new ParseArguments();
-                        command = new AddCommandImpl(parseArguments.checkArgumentForAdd(args), commandAddDefinition);
+                        command = new AddCommandImpl(parseArguments.checkArgumentForAdd(args), addCommandReceiver);
                     } else if (arguments[0].equals("find")) {
                         CommandFindDefinition commandFindDefinition = new CommandFindDefinition();
                         ParseArguments parseArguments = new ParseArguments();
