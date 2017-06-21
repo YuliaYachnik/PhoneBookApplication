@@ -1,15 +1,10 @@
 package org.parsing;
 
 import org.services.Command;
-import org.services.add.AddCommandImpl;
 import org.services.add.AddCommandReceiver;
-import org.services.find.CommandFindDefinition;
-import org.services.find.FindCommandImpl;
-import org.services.help.CommandDefinitionToHelp;
+import org.services.find.FindCommandReceiver;
 import org.services.help.CommandHelpDefinitionToHelp;
-import org.services.help.HelpCommandImpl;
-import org.services.list.CommandListDefinition;
-import org.services.list.ListCommandImpl;
+import org.services.list.ListCommandReceiver;
 
 /**
  * Created by Юлия on 17.06.2017.
@@ -39,16 +34,15 @@ public class ParseStartingMethodName {
                         ParseArguments parseArguments = new ParseArguments();
                    //     command = new AddCommandImpl(parseArguments.checkArgumentForAdd(args), addCommandReceiver);
                     } else if (arguments[0].equals("find")) {
-                        CommandFindDefinition commandFindDefinition = new CommandFindDefinition();
+                        FindCommandReceiver findCommandReceiver = new FindCommandReceiver();
                         ParseArguments parseArguments = new ParseArguments();
-                        command = new FindCommandImpl(commandFindDefinition, parseArguments.checkArgumentForFind(args));
+                        //command = new FindCommandImpl(findCommandReceiver, parseArguments.checkArgumentForFind(args));
                     } else if (arguments[0].equals("list")) {
-                        CommandListDefinition commandListDefinition = new CommandListDefinition();
+                        ListCommandReceiver listCommandReceiver = new ListCommandReceiver();
                         ParseArguments parseArguments = new ParseArguments();
-                        command = new ListCommandImpl(commandListDefinition, parseArguments.checkArgumentForList(args));
+                      //  command = new ListCommandImpl(listCommandReceiver, parseArguments.checkArgumentForList(args));
                     } else if (arguments[0].equals("help")) {
-                        CommandDefinitionToHelp commandDefinitionToHelp = new CommandHelpDefinitionToHelp();
-                        command = new HelpCommandImpl(commandDefinitionToHelp);
+                      //  command = new HelpCommandImpl(commandDefinitionToHelp);
                     } else {
                         System.out.println("Error syntax. Please,use help-manager.");
                         System.exit(0);

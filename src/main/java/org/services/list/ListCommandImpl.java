@@ -2,26 +2,23 @@ package org.services.list;
 
 import org.parsing.ParseArguments;
 import org.services.Command;
-import org.services.help.CommandDefinitionToHelp;
-import org.services.help.CommandListDefinitionToHelp;
-
-import java.awt.*;
+import org.services.checker.ListCommandCheckImpl;
 
 /**
  * Created by Юлия on 16.06.2017.
  */
 public class ListCommandImpl implements Command{
-    private CommandListDefinition commandListDefinition;
+    private ListCommandReceiver listCommandReceiver;
+    private ListCommandCheckImpl listCommandCheck;
     private ParseArguments parseArguments;
+    String args[];
 
-    public ListCommandImpl(CommandListDefinition commandListDefinition, ParseArguments parseArguments){
-        this.commandListDefinition = commandListDefinition;
-        this.parseArguments = parseArguments;
+    public ListCommandImpl(){
+        this.listCommandReceiver = new ListCommandReceiver();
+        this.listCommandCheck = new ListCommandCheckImpl();
     }
 
-    public ListCommandImpl(){}
-
     public void execute() {
-        if(parseArguments != null) commandListDefinition.list(parseArguments);
+        if(listCommandCheck.check(args) != null) listCommandReceiver.list(parseArguments);
     }
 }

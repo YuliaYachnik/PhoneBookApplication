@@ -2,10 +2,10 @@ package org;
 
 import org.services.Command;
 
-import org.services.checker.Check;
-import org.services.checker.CommandCheckDefinition;
+import org.services.checker.*;
 import org.services.CommandDefinition;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,14 +26,12 @@ public class PhoneBookApplication {
 
     public void run(String args[]){
         String commandName = args[0];
-        CommandCheckDefinition commandCheckDefinition;
         try{
             Command  command = commandDefinitionMap.get(commandName).getCommand().newInstance();
 
-           commandCheckDefinition = new CommandCheckDefinition(command, commandName, commandDefinition);
-          // Check check  = commandCheckDefinition.getCheckClass().newInstance();
-            Check check = commandCheckDefinition.getCommandCheckMap().get(commandName).getClass().newInstance();
 
+           // Check check = commandCheckDefinition.getCommandCheckMap().get(commandName).getClass().newInstance();
+           // command.getClass().getMethod("check").invoke(args);
             command.execute();
 
         }catch (NullPointerException e){
@@ -43,6 +41,5 @@ public class PhoneBookApplication {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-
     }
 }

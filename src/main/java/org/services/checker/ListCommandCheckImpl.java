@@ -5,7 +5,8 @@ package org.services.checker;
  */
 public class ListCommandCheckImpl implements Check {
     @Override
-    public void check() {
-
+    public Check check(String args[]) {
+        System.out.println("I'm listCommandCheck!");
+        return this;
     }
 }

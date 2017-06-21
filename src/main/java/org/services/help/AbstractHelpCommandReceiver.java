@@ -1,11 +1,9 @@
 package org.services.help;
 
-import org.parsing.ParseArguments;
-
 /**
- * Created by Юлия on 16.06.2017.
+ * Created by Юлия on 21.06.2017.
  */
-public abstract  class CommandDefinitionToHelp{
+public abstract class AbstractHelpCommandReceiver {
     private  String messege = "\t\t\tWelcome to the Help-manager!\t\t\t" +
             "\n\t This application works with the phonebook.\t\n" +
             "You can ADD DATA to default file or to file that you created.\n" +
@@ -19,7 +17,7 @@ public abstract  class CommandDefinitionToHelp{
     public  void hello() {
         System.out.println(messege);
     }
-   public  void notice(){
+    public  void notice(){
         System.out.println(noticeFileAndDir);
     }
 

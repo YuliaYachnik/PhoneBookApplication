@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by Юлия on 16.06.2017.
  */
-public class CommandFindDefinition {
+public class FindCommandReceiver {
     private ArrayList<Data> personFindOut = new ArrayList<Data>();
 
     public void find(ParseArguments parseArguments) {

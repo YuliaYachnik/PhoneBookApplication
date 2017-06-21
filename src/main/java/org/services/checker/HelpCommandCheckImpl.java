@@ -5,8 +5,9 @@ package org.services.checker;
  */
 public class HelpCommandCheckImpl implements Check {
     @Override
-    public void check() {
+    public Check check(String args[]) {
         System.out.println("I'm HelpCommand check!");
+        return this;
 
     }
 }

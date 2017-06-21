@@ -3,7 +3,7 @@ package org.services.help;
 /**
  * Created by Юлия on 18.06.2017.
  */
-public class CommandAddDefinitionToHelp extends CommandDefinitionToHelp implements Help {
+public class CommandAddDefinitionToHelp extends AbstractHelpCommandReceiver implements Help {
     private String addMessage = "\n\t\t\t ADD \t\t\t\n" +
             "With the help of this command, you can write to default file" +
             " data about the person (his name and his contact phone number):\n" +
@@ -17,7 +17,7 @@ public class CommandAddDefinitionToHelp extends CommandDefinitionToHelp implemen
         super.notice();
     }
 
-    public CommandDefinitionToHelp executeHelp() {
+    public AbstractHelpCommandReceiver executeHelp() {
         addHelp();
         return this;
     }

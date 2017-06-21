@@ -3,7 +3,7 @@ package org.services.help;
 /**
  * Created by Юлия on 18.06.2017.
  */
-public class CommandFindDefinitionToHelp extends CommandDefinitionToHelp implements Help{
+public class CommandFindDefinitionToHelp extends AbstractHelpCommandReceiver implements Help{
     private  String findMessage = "\n\t\t\t FIND \t\t\t\n" +
             "With the help of this command, you can find phone number of any person by his name" +
             "in default file:\n" +
@@ -17,7 +17,7 @@ public class CommandFindDefinitionToHelp extends CommandDefinitionToHelp impleme
         super.notice();
     }
 
-    public CommandDefinitionToHelp executeHelp() {
+    public AbstractHelpCommandReceiver executeHelp() {
         findHelp();
         return this;
     }

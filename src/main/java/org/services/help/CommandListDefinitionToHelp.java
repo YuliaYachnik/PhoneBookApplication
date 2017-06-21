@@ -3,7 +3,7 @@ package org.services.help;
 /**
  * Created by Юлия on 18.06.2017.
  */
-public class CommandListDefinitionToHelp extends CommandDefinitionToHelp implements Help {
+public class CommandListDefinitionToHelp extends AbstractHelpCommandReceiver implements Help {
     private String listMessage = "\n\t\t\t LIST \t\t\t\n" +
             "With the help of this command, you can view information about all persons in default file:\n" +
             "list \n" +
@@ -15,7 +15,7 @@ public class CommandListDefinitionToHelp extends CommandDefinitionToHelp impleme
         super.notice();
     }
 
-    public CommandDefinitionToHelp executeHelp() {
+    public AbstractHelpCommandReceiver executeHelp() {
         listHelp();
         return this;
     }

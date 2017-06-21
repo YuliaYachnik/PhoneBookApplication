@@ -2,24 +2,25 @@ package org.services.find;
 
 import org.parsing.ParseArguments;
 import org.services.Command;
-import org.services.help.CommandDefinitionToHelp;
-import org.services.help.CommandFindDefinitionToHelp;
+import org.services.checker.FindCommandCheckImpl;
 
 /**
  * Created by Юлия on 16.06.2017.
  */
 public class FindCommandImpl implements Command {
-    private CommandFindDefinition commandFindDefinition;
+    private FindCommandReceiver findCommandReceiver;
+    private FindCommandCheckImpl findCommandCheck;
     private ParseArguments parseArguments;
+    private String args[];
 
-    public FindCommandImpl(CommandFindDefinition commandFindDefinition, ParseArguments parseArguments) {
-        this.commandFindDefinition = commandFindDefinition;
-        this.parseArguments = parseArguments;
+    public FindCommandImpl() {
+        this.findCommandReceiver = new FindCommandReceiver();
+        this.findCommandCheck = new FindCommandCheckImpl();
     }
-    public FindCommandImpl(){}
 
     public void execute() {
-        if(parseArguments != null) commandFindDefinition.find(parseArguments);
-
+        if(findCommandCheck.check(args) != null)
+            findCommandReceiver.find(parseArguments);
     }
+
 }

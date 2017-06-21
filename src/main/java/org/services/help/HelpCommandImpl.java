@@ -6,16 +6,16 @@ import org.services.Command;
  * Created by Юлия on 16.06.2017.
  */
 public class HelpCommandImpl implements Command {
-    private CommandDefinitionToHelp commandDefinitionToHelp;
+    private AbstractHelpCommandReceiver abstractHelpCommandReceiver;
 
-    public HelpCommandImpl(CommandDefinitionToHelp commandDefinitionToHelp) {
-        this.commandDefinitionToHelp = commandDefinitionToHelp;
+    public HelpCommandImpl(AbstractHelpCommandReceiver abstractHelpCommandReceiver) {
+        this.abstractHelpCommandReceiver = abstractHelpCommandReceiver;
     }
 
     public HelpCommandImpl(){}
 
     public void execute() {
-        commandDefinitionToHelp = new CommandHelpDefinitionToHelp().executeHelp() ;
+        abstractHelpCommandReceiver = new CommandHelpDefinitionToHelp().executeHelp();
         System.exit(0);
     }
 }

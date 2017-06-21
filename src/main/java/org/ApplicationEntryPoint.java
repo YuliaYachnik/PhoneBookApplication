@@ -3,6 +3,10 @@ package org;
 import org.services.CommandDefinition;
 import org.services.ParametrDefinitions;
 import org.services.add.AddCommandImpl;
+import org.services.checker.AddCommandCheckImpl;
+import org.services.checker.FindCommandCheckImpl;
+import org.services.checker.HelpCommandCheckImpl;
+import org.services.checker.ListCommandCheckImpl;
 import org.services.find.FindCommandImpl;
 import org.services.help.HelpCommandImpl;
 import org.services.list.ListCommandImpl;
@@ -45,7 +49,6 @@ public class ApplicationEntryPoint {
         Class commandFind = FindCommandImpl.class;
         Class commandList = ListCommandImpl.class;
         Class commandHelp = HelpCommandImpl.class;
-
 
 
          PhoneBookApplication phoneBookApplication = new PhoneBookApplicationBuilder()
