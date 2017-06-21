@@ -1,9 +1,6 @@
 package org.services.add;
 
-import org.parsing.ParseArguments;
 import org.services.Command;
-import org.services.checker.AddCommandCheckImpl;
-import org.services.checker.Check;
 
 /**
  * Created by Юлия on 16.06.2017.

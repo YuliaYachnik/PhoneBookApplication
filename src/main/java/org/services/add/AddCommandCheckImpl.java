@@ -1,10 +1,12 @@
-package org.services.checker;
+package org.services.add;
+
+import org.services.Check;
 
 /**
  * Created by Юлия on 20.06.2017.
  */
 public class AddCommandCheckImpl implements Check {
-    private  CheckAddCommandReceiver checkAddCommandReceiver;
+    private CheckAddCommandReceiver checkAddCommandReceiver;
 
     public AddCommandCheckImpl() {
         this.checkAddCommandReceiver = new CheckAddCommandReceiver();

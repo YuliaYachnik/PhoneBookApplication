@@ -10,7 +10,6 @@ public class ParametrDefinitions {
     private String name;
     private boolean isOptional;
 
-    public ParametrDefinitions(){}
 
     public ParametrDefinitions(String name, boolean isOptional) {
         this.name = name;
