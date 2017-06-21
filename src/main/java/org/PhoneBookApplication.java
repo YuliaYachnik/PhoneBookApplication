@@ -29,9 +29,11 @@ public class PhoneBookApplication {
         CommandCheckDefinition commandCheckDefinition;
         try{
             Command  command = commandDefinitionMap.get(commandName).getCommand().newInstance();
-            commandCheckDefinition = new CommandCheckDefinition(command);
-            Check check  = commandCheckDefinition.getCheckClass().newInstance();
-            check.check();
+
+           commandCheckDefinition = new CommandCheckDefinition(command, commandName, commandDefinition);
+          // Check check  = commandCheckDefinition.getCheckClass().newInstance();
+            Check check = commandCheckDefinition.getCommandCheckMap().get(commandName).getClass().newInstance();
+
             command.execute();
 
         }catch (NullPointerException e){

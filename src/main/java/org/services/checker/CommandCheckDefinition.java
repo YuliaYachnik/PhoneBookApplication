@@ -4,15 +4,17 @@ import org.services.Command;
 import org.services.CommandDefinition;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Юлия on 20.06.2017.
  */
 public class CommandCheckDefinition {
+    private List <CommandDefinition> commandDefinition;
     private Command command;
     private Class <Check> checkClass;
-    private Map<Command,Class> commandCheckMap;
+    private Map<String,Class> commandCheckMap;
 
     public Class<Check> getCheckClass() {
 
@@ -20,7 +22,12 @@ public class CommandCheckDefinition {
 
     }
 
-    public CommandCheckDefinition(Command command) {
+    public Map<String, Class> getCommandCheckMap() {
+        return commandCheckMap;
+    }
+
+    public CommandCheckDefinition(Command command, String name, List<CommandDefinition > commandDefinition) {
+        this.commandDefinition  = commandDefinition;
         this.command = command;
         try {
             initCheckClass();
@@ -37,10 +44,10 @@ public class CommandCheckDefinition {
         Class checkHelp = HelpCommandCheckImpl.class;
 
         commandCheckMap = new HashMap<>();
-        commandCheckMap.put(command,checkAdd);
-        commandCheckMap.put(command,checkFind);
-        commandCheckMap.put(command,checkList);
-        commandCheckMap.put(command,checkHelp);
+        commandCheckMap.put(commandDefinition.get(0).getName(),checkAdd);
+        commandCheckMap.put(commandDefinition.get(1).getName(),checkFind);
+        commandCheckMap.put(commandDefinition.get(2).getName(),checkList);
+        commandCheckMap.put(commandDefinition.get(3).getName(),checkHelp);
 
       //  checkClass = commandCheckMap.get(command).getClass().newInstance();
        return this;

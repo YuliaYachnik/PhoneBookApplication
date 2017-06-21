@@ -37,7 +37,7 @@ public class ParseStartingMethodName {
                     if (arguments[0].equals("add")) {
                         AddCommandReceiver addCommandReceiver = new AddCommandReceiver();
                         ParseArguments parseArguments = new ParseArguments();
-                        command = new AddCommandImpl(parseArguments.checkArgumentForAdd(args), addCommandReceiver);
+                   //     command = new AddCommandImpl(parseArguments.checkArgumentForAdd(args), addCommandReceiver);
                     } else if (arguments[0].equals("find")) {
                         CommandFindDefinition commandFindDefinition = new CommandFindDefinition();
                         ParseArguments parseArguments = new ParseArguments();

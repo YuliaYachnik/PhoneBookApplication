@@ -8,17 +8,19 @@ import org.services.Command;
  */
 public class AddCommandImpl implements Command{
     private AddCommandReceiver addCommandReceiver;
-    private  ParseArguments parseArguments;
+ //   private  ParseArguments parseArguments;
 
-    public AddCommandImpl(ParseArguments parseArguments, AddCommandReceiver addCommandReceiver){
-        this.parseArguments = parseArguments;
-        this.addCommandReceiver = addCommandReceiver;
+   // public AddCommandImpl(AddCommandReceiver addCommandReceiver){
+      //  this.parseArguments = parseArguments;
+      //  this.addCommandReceiver = addCommandReceiver;
+  //  }
+
+    public AddCommandImpl(){
+        addCommandReceiver = new AddCommandReceiver();
     }
 
-    public AddCommandImpl(){}
-
     public void execute() {
-        if(parseArguments != null) addCommandReceiver.add(parseArguments);
+         addCommandReceiver.add();
 
     }
 }
