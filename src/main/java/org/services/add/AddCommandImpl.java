@@ -1,6 +1,10 @@
 package org.services.add;
 
 import org.services.Command;
+import org.services.CommandDefinition;
+import org.services.add.checkAdd.AddCommandCheckImpl;
+
+import java.util.Map;
 
 /**
  * Created by Юлия on 16.06.2017.
@@ -8,7 +12,7 @@ import org.services.Command;
 public class AddCommandImpl implements Command {
     private AddCommandCheckImpl addCommandCheck;
     private AddCommandReceiver addCommandReceiver;
-    private String args[];
+   // private String args[];
 
 
     public AddCommandImpl(){
@@ -16,9 +20,7 @@ public class AddCommandImpl implements Command {
         addCommandCheck = new AddCommandCheckImpl();
     }
 
-    public void execute() {
-        if(addCommandCheck.check(args)!= null)
-         addCommandReceiver.add();
-
+    public void execute(Map<String,String> map,String args[]) {
+         addCommandReceiver.add(addCommandCheck.check(map,args));
     }
 }

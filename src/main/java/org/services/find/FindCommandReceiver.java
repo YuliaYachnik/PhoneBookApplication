@@ -2,7 +2,7 @@ package org.services.find;
 
 import org.date.Data;
 import org.fileworking.FileWorker;
-import org.parsing.ParseArguments;
+
 import java.util.ArrayList;
 
 /**
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class FindCommandReceiver {
     private ArrayList<Data> personFindOut = new ArrayList<Data>();
 
-    public void find(ParseArguments parseArguments) {
-        try {
+    public void find() {
+        /*try {
             if (parseArguments == null)
                 throw new Exception();
             else {
@@ -32,7 +32,7 @@ public class FindCommandReceiver {
         } catch (Exception e) {
             System.out.println("No data found! Please, use help-manager.");
             return;
-        }
+        }*/
 
     }
 }

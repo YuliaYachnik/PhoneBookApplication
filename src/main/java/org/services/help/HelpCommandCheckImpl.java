@@ -1,6 +1,10 @@
 package org.services.help;
 
 import org.services.Check;
+import org.services.ParametrDefinitions;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Юлия on 21.06.2017.
@@ -13,9 +17,9 @@ public class HelpCommandCheckImpl implements Check {
     }
 
     @Override
-    public Check check(String args[]) {
+    public String[] check( Map<String,String> map, String args[]) {
         this.checkHelpCommandReceiver.checkHelpCommand();
-        return this;
+        return args;
 
     }
 }

@@ -2,7 +2,6 @@ package org.services.list;
 
 import org.date.Data;
 import org.fileworking.FileWorker;
-import org.parsing.ParseArguments;
 import java.util.ArrayList;
 
 /**
@@ -11,8 +10,8 @@ import java.util.ArrayList;
 public class ListCommandReceiver {
      private ArrayList<Data> personListOut = new ArrayList<Data>();
 
-    public void list(ParseArguments parseArguments) {
-        try {
+    public void list() {
+       /* try {
             if (parseArguments == null)
                 throw new Exception();
             else {
@@ -30,7 +29,7 @@ public class ListCommandReceiver {
         } catch (Exception e) {
             System.out.println("No data found! Please, use help-manager.");
             return;
-        }
+        }*/
 
     }
 }

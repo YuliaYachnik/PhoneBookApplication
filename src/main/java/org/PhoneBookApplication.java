@@ -1,10 +1,7 @@
 package org;
 
 import org.services.Command;
-
 import org.services.CommandDefinition;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,17 +21,18 @@ public class PhoneBookApplication {
     }
 
     public void run(String args[]){
-        String commandName = args[0];
         try{
+            String commandName = args[0];
             Command  command = commandDefinitionMap.get(commandName).getCommand().newInstance();
-            command.execute();
-
+            command.execute(this.params,args);
         }catch (NullPointerException e){
             System.out.println("Such method no definite");
+        }catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("No paramentrs in command line");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            System.out.println("Initializing parameters error");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            System.out.println("Illegal access to class");
         }
     }
 }

@@ -1,7 +1,9 @@
 package org.services.find;
 
-import org.parsing.ParseArguments;
 import org.services.Command;
+import org.services.CommandDefinition;
+
+import java.util.Map;
 
 /**
  * Created by Юлия on 16.06.2017.
@@ -9,7 +11,6 @@ import org.services.Command;
 public class FindCommandImpl implements Command {
     private FindCommandReceiver findCommandReceiver;
     private FindCommandCheckImpl findCommandCheck;
-    private ParseArguments parseArguments;
     private String args[];
 
     public FindCommandImpl() {
@@ -17,9 +18,9 @@ public class FindCommandImpl implements Command {
         this.findCommandCheck = new FindCommandCheckImpl();
     }
 
-    public void execute() {
-        if(findCommandCheck.check(args) != null)
-            findCommandReceiver.find(parseArguments);
+    public void execute( Map<String,String> map, String args[]) {
+        findCommandCheck.check(map, args) ;
+         //   findCommandReceiver.find(parseArguments);
     }
 
 }

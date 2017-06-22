@@ -23,7 +23,7 @@ public class ApplicationEntryPoint {
         ParametrDefinitions nameParametrDefinitions = new ParametrDefinitions("name",true);
         ParametrDefinitions phoneParametrDefinitions = new ParametrDefinitions("phone",true);
         ParametrDefinitions fileParametrDefinitions = new ParametrDefinitions("filename", false);
-        ParametrDefinitions dirParametrDefinitions = new ParametrDefinitions("dirname",true);
+        ParametrDefinitions dirParametrDefinitions = new ParametrDefinitions("dirname",false);
 
         addParametrDefinitionsList.add(nameParametrDefinitions);
         addParametrDefinitionsList.add(phoneParametrDefinitions);
@@ -37,9 +37,17 @@ public class ApplicationEntryPoint {
         listParametrDefinitionsList.add(fileParametrDefinitions);
         listParametrDefinitionsList.add(dirParametrDefinitions);
 
-        Map<String,String>  map = new HashMap<String, String>();
-        map.put("--filename","phonebook.txt");
-        map.put("--dirname","phonebook");
+        Map<String,String>  mapToAdd = new HashMap<String, String>();
+        mapToAdd.put("--filename","phonebook.txt");
+        mapToAdd.put("--dirname","phonebook");
+
+        Map<String,String>  mapToFind = new HashMap<String, String>();
+        mapToFind.put("--filename","phonebook.txt");
+        mapToFind.put("--dirname","phonebook");
+
+        Map<String,String>  mapToList = new HashMap<String, String>();
+        mapToList.put("--filename","phonebook.txt");
+        mapToList.put("--dirname","phonebook");
 
         Class commandAdd  =  AddCommandImpl.class;
         Class commandFind = FindCommandImpl.class;
@@ -49,13 +57,12 @@ public class ApplicationEntryPoint {
 
          PhoneBookApplication phoneBookApplication = new PhoneBookApplicationBuilder()
                  .withCommands(new CommandDefinition("add", addParametrDefinitionsList,commandAdd))
-                 .withConfig(map)
-                 .withCommands(new CommandDefinition("find", findParametrDefinitionsList, commandFind))
-                 .withConfig(map)
+                 .withConfig(mapToAdd)
+                /* .withCommands(new CommandDefinition("find", findParametrDefinitionsList, commandFind))
+                 .withConfig(mapToFind)
                  .withCommands(new CommandDefinition("list", listParametrDefinitionsList, commandList))
-                 .withConfig(map)
-                 .withCommands(new CommandDefinition("help", helpParametrDefinitionsList, commandHelp))
-                 .withConfig(map)
+                 .withConfig(mapToList)
+                 .withCommands(new CommandDefinition("help", helpParametrDefinitionsList, commandHelp))*/
                 .build();
 
         phoneBookApplication.run(args);
