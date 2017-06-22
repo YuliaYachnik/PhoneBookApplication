@@ -37,34 +37,24 @@ public class ApplicationEntryPoint {
         listParametrDefinitionsList.add(fileParametrDefinitions);
         listParametrDefinitionsList.add(dirParametrDefinitions);
 
-        Map<String,String>  mapToAdd = new HashMap<String, String>();
-        mapToAdd.put("--filename","phonebook.txt");
-        mapToAdd.put("--dirname","phonebook");
-
-        Map<String,String>  mapToFind = new HashMap<String, String>();
-        mapToFind.put("--filename","phonebook.txt");
-        mapToFind.put("--dirname","phonebook");
-
-        Map<String,String>  mapToList = new HashMap<String, String>();
-        mapToList.put("--filename","phonebook.txt");
-        mapToList.put("--dirname","phonebook");
-
-        Class commandAdd  =  AddCommandImpl.class;
-        Class commandFind = FindCommandImpl.class;
-        Class commandList = ListCommandImpl.class;
-        Class commandHelp = HelpCommandImpl.class;
+        Map<String,String>  matchOptionalParametrsWithDefaultValue = new HashMap<String, String>();
+        matchOptionalParametrsWithDefaultValue.put("--filename","phonebook.txt");
+        matchOptionalParametrsWithDefaultValue.put("--dirname","phonebook");
 
 
-         PhoneBookApplication phoneBookApplication = new PhoneBookApplicationBuilder()
-                 .withCommands(new CommandDefinition("add", addParametrDefinitionsList,commandAdd))
-                 .withConfig(mapToAdd)
-                /* .withCommands(new CommandDefinition("find", findParametrDefinitionsList, commandFind))
-                 .withConfig(mapToFind)
-                 .withCommands(new CommandDefinition("list", listParametrDefinitionsList, commandList))
-                 .withConfig(mapToList)
-                 .withCommands(new CommandDefinition("help", helpParametrDefinitionsList, commandHelp))*/
-                .build();
+        Class commandAdd  =  AddCommandImpl.class;//перенести в метод
+        Class commandFind = FindCommandImpl.class;//перенести в метод
+        Class commandList = ListCommandImpl.class;//перенести в метод
+        Class commandHelp = HelpCommandImpl.class;//перенести в метод
 
+
+        PhoneBookApplication phoneBookApplication = new PhoneBookApplicationBuilder()
+                    .withCommands(new CommandDefinition("add", addParametrDefinitionsList,commandAdd))
+                    .withCommands(new CommandDefinition("find", findParametrDefinitionsList, commandFind))
+                    .withCommands(new CommandDefinition("list", listParametrDefinitionsList, commandList))
+                    .withCommands(new CommandDefinition("help", helpParametrDefinitionsList, commandHelp))
+                    .withConfig(matchOptionalParametrsWithDefaultValue)
+                   .build();
         phoneBookApplication.run(args);
     }
 }

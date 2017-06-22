@@ -17,8 +17,8 @@ public class ListCommandCheckImpl implements Check {
     }
 
     @Override
-    public String[] check( Map<String,String> map, String args[]) {
+    public boolean check( List<ParametrDefinitions> parametrDefinitions, String args[]) {
         checkListCommandReceiver.checkListCommand();
-        return args;
+        return true;
     }
 }

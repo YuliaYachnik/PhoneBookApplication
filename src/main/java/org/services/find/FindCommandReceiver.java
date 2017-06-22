@@ -11,14 +11,11 @@ import java.util.ArrayList;
 public class FindCommandReceiver {
     private ArrayList<Data> personFindOut = new ArrayList<Data>();
 
-    public void find() {
-        /*try {
-            if (parseArguments == null)
-                throw new Exception();
-            else {
-                String filename = parseArguments.getFile();
-                String dirname = parseArguments.getFiledir();
-                String name = parseArguments.getName();
+    public void find(String args[]) {
+        try {
+                String name = args[1];
+                String filename = args[2];
+                String dirname = args[3];
                 FileWorker fileWorker = new FileWorker();
                 personFindOut = fileWorker.findInFile(name, filename, dirname);
                 if (personFindOut.size() != 0) {
@@ -27,12 +24,9 @@ public class FindCommandReceiver {
                     }
                 } else
                     System.out.println("No data found! Please, use help-manager.");
-            }
-
         } catch (Exception e) {
             System.out.println("No data found! Please, use help-manager.");
             return;
-        }*/
-
+        }
     }
 }

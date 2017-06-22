@@ -1,7 +1,7 @@
 package org;
 
-import org.services.Command;
-import org.services.CommandDefinition;
+import org.services.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +12,15 @@ public class PhoneBookApplication {
     private Map <String,CommandDefinition> commandDefinitionMap;
 
     public PhoneBookApplication(List <CommandDefinition> commandDefinition, Map<String, String> params) {
-        this.commandDefinition = commandDefinition;
-        this.params = params;
-        commandDefinitionMap = new HashMap<>();
-        for(int i = 0; i < commandDefinition.size(); i++) {
-            commandDefinitionMap.put(commandDefinition.get(i).getName(), commandDefinition.get(i));
+        if(commandDefinition == null &&  params == null)
+            throw new RuntimeException("No arguments in command line");
+        else{
+            this.commandDefinition = commandDefinition;
+            this.params = params;
+            commandDefinitionMap = new HashMap<>();
+            for(int i = 0; i < commandDefinition.size(); i++) {
+                commandDefinitionMap.put(commandDefinition.get(i).getName(), commandDefinition.get(i));
+            }
         }
     }
 
@@ -24,7 +28,9 @@ public class PhoneBookApplication {
         try{
             String commandName = args[0];
             Command  command = commandDefinitionMap.get(commandName).getCommand().newInstance();
-            command.execute(this.params,args);
+            CheckManager checkManager = new CheckManager();
+            Check commandCheck = new CommandCheckImpl(this.commandDefinitionMap.get(commandName).getParametrDefinitions(),args);
+            command.execute(checkManager.returnValideObject(commandCheck));
         }catch (NullPointerException e){
             System.out.println("Such method no definite");
         }catch (ArrayIndexOutOfBoundsException e){

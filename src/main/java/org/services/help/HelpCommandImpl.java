@@ -1,5 +1,6 @@
 package org.services.help;
 
+import org.services.CheckManager;
 import org.services.Command;
 import org.services.CommandDefinition;
 
@@ -20,9 +21,9 @@ public class HelpCommandImpl implements Command {
 
     public HelpCommandImpl(){}
 
-    public void execute( Map<String,String> map,String args[]) {
-        helpCommandCheck.check(map,args);
+    public void execute( CheckManager checkManager) {
+      /*  helpCommandCheck.check(map,args);
         abstractHelpCommandReceiver = new CommandHelpDefinitionToHelp().executeHelp();
-        System.exit(0);
+        System.exit(0);*/
     }
 }
