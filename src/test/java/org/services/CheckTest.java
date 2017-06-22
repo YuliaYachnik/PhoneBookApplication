@@ -1,5 +1,6 @@
 package org.services;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,18 +37,13 @@ public class CheckTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void throwExceptionIfArgsIsNull(){
-     check.check(initListOfParametrDefinition(),initStringArgumentsOfParametrDefinition());
+    public void throwExceptionIfOneFromArgsIsNull(){
+     Assert.assertTrue(check.check(initListOfParametrDefinition(),null));
     }
 
-    @Test(expected = NullPointerException.class)
-    public void throwExceptionIfListIsNull(){
-     check.check(initListOfParametrDefinition(),initStringArgumentsOfParametrDefinition());
-    }
-
-    @Test(expected = RuntimeException.class)
+    @Test(expected = AssertionError.class)//убрать
     public void throwExceptionIfNotReturnFalseBooleanValue(){
-       assertFalse(check.check(initListOfParametrDefinition(),initStringArgumentsOfParametrDefinition()));
+       Assert.assertTrue(check.check(initListOfParametrDefinition(),null));
     }
 
      @Test(expected = RuntimeException.class)

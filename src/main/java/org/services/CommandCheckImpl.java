@@ -24,14 +24,13 @@ public class CommandCheckImpl implements Check {
 
     @Override
     public boolean check(List<ParametrDefinitions> parametrDefinitions, String args[]) {
-        /*try{
-        String str[]  = checkAddCommandReceiver.checkAddCommand(parametrDefinitions,args);
-        if(str != null) return str;
-        else throw new RuntimeException();
-        }catch (RuntimeException e){
-            System.out.println("Command Add is not valid! Please, use help-manager");
-            return null;
-        }*/
-        return true;
-    }
-}
+        try {
+            if (parametrDefinitions == null || args == null) {
+                throw new NullPointerException();
+            } else
+                return true;
+        }catch (NullPointerException e){
+            System.out.println("Parametrs are not valid! Please, use help-manager");
+            return false;
+        }
+}}
