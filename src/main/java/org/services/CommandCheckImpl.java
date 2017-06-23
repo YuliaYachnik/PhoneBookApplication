@@ -22,15 +22,33 @@ public class CommandCheckImpl implements Check {
         this.commandArgumentsFromCommandLine = commandArgumentsFromCommandLine;
     }
 
+    public List<ParametrDefinitions> getParametrDefinitions() {
+        return parametrDefinitions;
+    }
+
+    public String[] getCommandArgumentsFromCommandLine() {
+        return commandArgumentsFromCommandLine;
+    }
+
     @Override
     public boolean check(List<ParametrDefinitions> parametrDefinitions, String args[]) {
-        try {
+      //  try {
             if (parametrDefinitions == null || args == null) {
-                throw new NullPointerException();
-            } else
+                throw new NullPointerException("Parametrs are not valid! Please, use help-manager");
+            } else{
+
+            }
                 return true;
-        }catch (NullPointerException e){
-            System.out.println("Parametrs are not valid! Please, use help-manager");
-            return false;
+        /*}catch (NullPointerException e){
+        return false;
+        //  System.out.println("Parametrs are not valid! Please, use help-manager");
+        }*/
+    }
+
+   /* public boolean checkNumberOfParametrs(){
+        for(int i = 0; i < this.getParametrDefinitions().size(); i++){
+            this.getParametrDefinitions().get(i).getName()
         }
-}}
+
+    }*/
+}

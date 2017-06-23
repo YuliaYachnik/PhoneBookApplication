@@ -1,5 +1,6 @@
 package org.services.list;
 
+import org.date.Data;
 import org.services.CheckManager;
 import org.services.Command;
 import org.services.CommandDefinition;
@@ -19,7 +20,7 @@ public class ListCommandImpl implements Command{
         this.listCommandCheck = new ListCommandCheckImpl();
     }
 
-    public void execute( CheckManager checkManager) {
+    public void execute(Data data) {
       /*  listCommandCheck.check(map,args) ;
             listCommandReceiver.list();*/
     }

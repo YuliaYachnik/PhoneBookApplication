@@ -1,5 +1,6 @@
 package org.services.find;
 
+import org.date.Data;
 import org.services.CheckManager;
 import org.services.Command;
 import org.services.ParametrDefinitions;
@@ -20,7 +21,7 @@ public class FindCommandImpl implements Command {
         this.findCommandCheck = new FindCommandCheckImpl();
     }
 
-    public void execute(CheckManager checkManager) {
+    public void execute(Data data) {
          // findCommandReceiver.find(findCommandCheck.check(map, args));
     }
 

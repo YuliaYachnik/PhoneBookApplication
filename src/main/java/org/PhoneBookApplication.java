@@ -1,5 +1,6 @@
 package org;
 
+import org.date.Data;
 import org.services.*;
 
 import java.util.HashMap;
@@ -28,9 +29,11 @@ public class PhoneBookApplication {
         try{
             String commandName = args[0];
             Command  command = commandDefinitionMap.get(commandName).getCommand().newInstance();
-            CheckManager checkManager = new CheckManager();
-            Check commandCheck = new CommandCheckImpl(this.commandDefinitionMap.get(commandName).getParametrDefinitions(),args);
-            command.execute(checkManager.returnValideObject(commandCheck));
+            Data data = new Data();
+            CommandCheckImpl commandCheck = new CommandCheckImpl(this.commandDefinitionMap.get(commandName).getParametrDefinitions(),args);
+           // CheckManager checkManager = new CheckManager(CommandCheckImpl);
+
+           // command.execute(checkManager.returnValideObject(commandCheck));
         }catch (NullPointerException e){
             System.out.println("Such method no definite");
         }catch (ArrayIndexOutOfBoundsException e){

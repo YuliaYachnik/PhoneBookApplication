@@ -1,31 +1,21 @@
 package org.services;
 
+import org.date.Data;
+
+import java.util.List;
+
 /**
- * Created by Юлия on 22.06.2017.
+ * Created by Юлия on 23.06.2017.
  */
 public class CheckManager {
-    private String name;
-    private String phone;
-    private String fileName;
-    private String dirName;
+    Data data;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public Data returnValideObject(CommandCheckImpl commandCheck){
+        String stringArgsCheck[] = commandCheck.getCommandArgumentsFromCommandLine();
+        List<ParametrDefinitions> parametrDefinitionsList = commandCheck.getParametrDefinitions();
+        if(commandCheck.check(parametrDefinitionsList,stringArgsCheck) == true){
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public void setDirName(String dirName) {
-        this.dirName = dirName;
-    }
-
-    public CheckManager returnValideObject(Check check){
-        return this;
+        }
+        return data;
     }
 }

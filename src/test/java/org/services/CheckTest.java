@@ -37,17 +37,14 @@ public class CheckTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void throwExceptionIfOneFromArgsIsNull(){
-     Assert.assertTrue(check.check(initListOfParametrDefinition(),null));
+    public void throwExceptionIfStringArgsIsNull(){
+     Assert.assertFalse(check.check(initListOfParametrDefinition(),null));
     }
 
-    @Test(expected = AssertionError.class)//убрать
-    public void throwExceptionIfNotReturnFalseBooleanValue(){
-       Assert.assertTrue(check.check(initListOfParametrDefinition(),null));
+    @Test(expected = NullPointerException.class)
+    public void throwExceptionIfListArgsIsNull(){
+        Assert.assertFalse(check.check(null,initStringArgumentsOfParametrDefinition()));
     }
 
-     @Test(expected = RuntimeException.class)
-     public void throwExceptionIfNotReturnTrueBooleanValue(){
-    assertTrue(check.check(initListOfParametrDefinition(),initStringArgumentsOfParametrDefinition()));
-  }
+
 }

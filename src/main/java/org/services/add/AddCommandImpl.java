@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class AddCommandImpl implements Command {
 
-    public void execute(CheckManager checkManager) { //передавать объект с валидными полями
+    public void execute(Data data) { //передавать объект с валидными полями
       /*  Data data = new Data(args[1], args[2], args[3], args[4]);
       //  person.add(data);
         FileWorker fileWorker = new FileWorker();

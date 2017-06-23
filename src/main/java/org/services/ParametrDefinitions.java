@@ -11,6 +11,14 @@ public class ParametrDefinitions {
     private boolean isOptional;
 
 
+    public String getName() {
+        return name;
+    }
+
+    public boolean isOptional() {
+        return isOptional;
+    }
+
     public ParametrDefinitions(String name, boolean isOptional) {
         this.name = name;
         this.isOptional = isOptional;

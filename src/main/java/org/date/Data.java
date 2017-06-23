@@ -13,6 +13,9 @@ public class Data {
         this.dirName = dirName;
     }
 
+    public Data() {
+    }
+
     public String getName() {
         return name;
     }
