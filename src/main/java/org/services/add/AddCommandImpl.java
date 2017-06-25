@@ -8,6 +8,8 @@ import org.services.CommandCheckImpl;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,8 +18,8 @@ import java.util.Map;
 public class AddCommandImpl implements Command {
 
     public void execute(Data data) { //передавать объект с валидными полями
-      /*  Data data = new Data(args[1], args[2], args[3], args[4]);
-      //  person.add(data);
+        List<Data> persons = new ArrayList<>();
+        persons.add(data);
         FileWorker fileWorker = new FileWorker();
         try {
             fileWorker.writeFile(data);
@@ -25,7 +27,7 @@ public class AddCommandImpl implements Command {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 }
 

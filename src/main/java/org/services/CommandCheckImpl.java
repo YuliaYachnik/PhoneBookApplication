@@ -32,17 +32,12 @@ public class CommandCheckImpl implements Check {
 
     @Override
     public boolean check(List<ParametrDefinitions> parametrDefinitions, String args[]) {
-      //  try {
             if (parametrDefinitions == null || args == null) {
                 throw new NullPointerException("Parametrs are not valid! Please, use help-manager");
             } else{
 
             }
                 return true;
-        /*}catch (NullPointerException e){
-        return false;
-        //  System.out.println("Parametrs are not valid! Please, use help-manager");
-        }*/
     }
 
    /* public boolean checkNumberOfParametrs(){

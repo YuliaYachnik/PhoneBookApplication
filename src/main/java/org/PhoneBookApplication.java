@@ -31,9 +31,8 @@ public class PhoneBookApplication {
             Command  command = commandDefinitionMap.get(commandName).getCommand().newInstance();
             Data data = new Data();
             CommandCheckImpl commandCheck = new CommandCheckImpl(this.commandDefinitionMap.get(commandName).getParametrDefinitions(),args);
-           // CheckManager checkManager = new CheckManager(CommandCheckImpl);
-
-           // command.execute(checkManager.returnValideObject(commandCheck));
+            CheckManager checkManager = new CheckManager();
+            command.execute(checkManager.returnValideObject(commandCheck));
         }catch (NullPointerException e){
             System.out.println("Such method no definite");
         }catch (ArrayIndexOutOfBoundsException e){
