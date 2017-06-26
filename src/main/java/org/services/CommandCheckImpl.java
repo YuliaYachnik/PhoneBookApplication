@@ -38,27 +38,57 @@ public class CommandCheckImpl implements Check {
             if (parametrDefinitions == null || args == null || optionalParams == null || args.length > 5){
                 throw new NullPointerException("Parametrs are not valid! Please, use help-manager");
             } else{
-               if( chooseVersionOfParsing(getNameOfMethod())== true) return true;
+               if( checkMatchingOptionalAndArgsParametr() == true)
+                   return true;
                 return false;
             }
     }
 
-    public boolean checkMatchingOptionalAndArgsParametrInAdd(){
-       if((getCommandArgumentsFromCommandLine().length == getMandatryArguments() + 1) && getOptionalParams() == null)
-           return false;
-       if((getCommandArgumentsFromCommandLine().length ==  getMandatryArguments() + 2 )&& getOptionalParams() == null)
-           return false;
-       if(getCommandArgumentsFromCommandLine().length >= getMandatryArguments() + 1)
-           return true;
-        else return false;
+    public  int getMandatoryArguments(){
+        int mandatoryCount = 0;
+        for(int i = 0; i < getParametrDefinitions().size(); i++){
+            if(getParametrDefinitions().get(i).isMandatory() == true)  mandatoryCount++;
+        }
+        return mandatoryCount;
     }
 
+    public boolean checkHelp(){
+        if(getCommandArgumentsFromCommandLine().length == 1 && getCommandArgumentsFromCommandLine().length >=  getParametrDefinitions().size())
+            return true;
+        else  return false;
+    }
+
+    public boolean generalRullCheck(){
+        if(getCommandArgumentsFromCommandLine().length < getMandatoryArguments() + 1 || getCommandArgumentsFromCommandLine().length >  getParametrDefinitions().size() + 1)
+                return false;
+        else return true;
+    }
+
+    public boolean checkMatchingOptionalAndArgsParametr(){
+
+       if(generalRullCheck() == true || checkHelp() == true){
+           if((getCommandArgumentsFromCommandLine().length >= getMandatoryArguments() + 1)&& getOptionalParams() == null)
+               return false;
+           return true;
+       }
+        return false;
+
+      /* if((getCommandArgumentsFromCommandLine().length == getMandatoryArguments() + 1) && getOptionalParams() == null)
+           return false;
+       if((getCommandArgumentsFromCommandLine().length ==  getMandatoryArguments() + 2 )&& getOptionalParams() == null)
+           return false;
+       if(getCommandArgumentsFromCommandLine().length >= getMandatoryArguments() + 1)
+           return true;
+        else return false;*/
+    }
+
+/*
    public boolean checkMatchingOptionalAndArgsParametrInFind(){
-        if((getCommandArgumentsFromCommandLine().length == getMandatryArguments() + 1) && getOptionalParams() == null)
+        if((getCommandArgumentsFromCommandLine().length == getMandatoryArguments() + 1) && getOptionalParams() == null)
             return false;
-        if(getCommandArgumentsFromCommandLine().length ==  getMandatryArguments() + 2 && getOptionalParams() == null)
+        if(getCommandArgumentsFromCommandLine().length ==  getMandatoryArguments() + 2 && getOptionalParams() == null)
             return false;
-        if((getCommandArgumentsFromCommandLine().length >=  getMandatryArguments() + 1) && getCommandArgumentsFromCommandLine().length < 5)
+        if((getCommandArgumentsFromCommandLine().length >=  getMandatoryArguments() + 1) && getCommandArgumentsFromCommandLine().length < 5)
             return true;
         else return false;
    }
@@ -69,31 +99,23 @@ public class CommandCheckImpl implements Check {
        if(getCommandArgumentsFromCommandLine().length < 4 ) return true;
        else return false;
    }
+*/
 
-   public  boolean checkMatchingOptionalAndArgsParametrInHelp(){
+  /* public  boolean checkMatchingOptionalAndArgsParametrInHelp(){
        if(getCommandArgumentsFromCommandLine().length == 1) return true;
        else return false;
-   }
-    public  int getMandatryArguments(){
-        int mandatoryCount = 0;
-        for(int i = 0; i < getParametrDefinitions().size(); i++){
-            if(getParametrDefinitions().get(i).isMandatory() == true)  mandatoryCount++;
-        }
-        if(mandatoryCount != 0)
-            return mandatoryCount;
-        else
-            throw new RuntimeException("Initializing parameters error. Please, use help-manager.");
-    }
+   }*/
 
-    public String getNameOfMethod(){
+
+  /*  public String getNameOfMethod(){
         String name = getCommandArgumentsFromCommandLine()[0];
         return name;
-    }
+    }*/
 
-    private  boolean chooseVersionOfParsing(String nameOfMethod){
-        if(nameOfMethod.equals("add")) return checkMatchingOptionalAndArgsParametrInAdd();
+  /*  private  boolean chooseVersionOfParsing(String nameOfMethod){
+        if(nameOfMethod.equals("add")) return checkMatchingOptionalAndArgsParametr();
         if(nameOfMethod.equals("find")) return checkMatchingOptionalAndArgsParametrInFind();
         if(nameOfMethod.equals("list"))return checkMatchingOptionalAndArgsParametrInList();
         else return checkMatchingOptionalAndArgsParametrInHelp();
-    }
+    }*/
 }

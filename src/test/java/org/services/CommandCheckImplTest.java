@@ -8,16 +8,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Юлия on 26.06.2017.
  */
 public class CommandCheckImplTest {
-    CommandCheckImpl commandCheck = new CommandCheckImpl(initListOfParametrDefinition(),initOptionalParamentrs(),initStringArgumentsOfParametrDefinition());
-    CommandCheckImpl commandCheckForHelp = new CommandCheckImpl(null,null,initStringArgumentsForHelp());
+    List<ParametrDefinitions> parametrDefinitionsList;
+    ParametrDefinitions name  = new ParametrDefinitions("name",true);
+    ParametrDefinitions phone  = new ParametrDefinitions("phone",true);
+    ParametrDefinitions filename  = new ParametrDefinitions("fileame",false);
+    ParametrDefinitions dirname  = new ParametrDefinitions("dirname",false);
 
-    public String[] initStringArgumentsOfParametrDefinition(){
+    CommandCheckImpl commandCheckForAdd = new CommandCheckImpl( initListOfAddDefinition(),initOptionalParamentrs(), initStringArgumentsForAdd());
+    CommandCheckImpl commandCheckForHelp = new CommandCheckImpl(null,null,initStringArgumentsForHelp());
+    CommandCheckImpl commandCheckForFind = new CommandCheckImpl(initListOfFindDefinition(),initOptionalParamentrs(),initStringArgumentsForFind());
+    CommandCheckImpl commandCheckForList = new CommandCheckImpl(initListOfListDefinition(),initOptionalParamentrs(),initStringArgumentsForList());
+
+    public String[] initStringArgumentsForAdd(){
         String[] returnString = new String[3];
         returnString[0] = "add";
        returnString[1] = "--name=Ivan";
@@ -29,14 +35,38 @@ public class CommandCheckImplTest {
         returnString[0] = "help";
         return returnString;
     }
-    public List<ParametrDefinitions> initListOfParametrDefinition(){
-        List<ParametrDefinitions> parametrDefinitionsList = new ArrayList<>();
-        ParametrDefinitions name  = new ParametrDefinitions("name",true);
-        ParametrDefinitions phone  = new ParametrDefinitions("phone",true);
-        ParametrDefinitions filename  = new ParametrDefinitions("fileame",false);
-        ParametrDefinitions dirname  = new ParametrDefinitions("dirname",false);
+
+    public String[] initStringArgumentsForList(){
+        String[] returnString = new String[1];
+        returnString[0] = "list";
+        return returnString;
+    }
+
+    public String[] initStringArgumentsForFind(){
+        String[] returnString = new String[2];
+        returnString[0] = "find";
+        returnString[1] = "--name=Ivan";
+        return returnString;
+    }
+    public List<ParametrDefinitions> initListOfAddDefinition(){
+        parametrDefinitionsList = new ArrayList<>();
         parametrDefinitionsList.add(name);
         parametrDefinitionsList.add(phone);
+        parametrDefinitionsList.add(filename);
+        parametrDefinitionsList.add(dirname);
+        return parametrDefinitionsList;
+    }
+
+    public List<ParametrDefinitions> initListOfFindDefinition(){
+        parametrDefinitionsList = new ArrayList<>();
+        parametrDefinitionsList.add(name);
+        parametrDefinitionsList.add(filename);
+        parametrDefinitionsList.add(dirname);
+        return parametrDefinitionsList;
+    }
+
+    public List<ParametrDefinitions> initListOfListDefinition(){
+        parametrDefinitionsList = new ArrayList<>();
         parametrDefinitionsList.add(filename);
         parametrDefinitionsList.add(dirname);
         return parametrDefinitionsList;
@@ -51,34 +81,27 @@ public class CommandCheckImplTest {
 
     @Test(expected = AssertionError.class)
     public void throwExceptionIfOptionalAndArgsParametrNotMatchInAdd(){
-        Assert.assertFalse(commandCheck.checkMatchingOptionalAndArgsParametrInAdd());
+        Assert.assertFalse(commandCheckForAdd.checkMatchingOptionalAndArgsParametr());
     }
 
     @Test(expected = AssertionError.class)
     public void throwExceptionIfptionalAndArgsParametrNotMatchInFind(){
-        Assert.assertFalse(commandCheck.checkMatchingOptionalAndArgsParametrInFind());
+        Assert.assertFalse(commandCheckForFind.checkMatchingOptionalAndArgsParametr());
     }
 
     @Test(expected = AssertionError.class)
     public void throwExceptionIfOptionalAndArgsParametrNotMatchInList(){
-        Assert.assertFalse(commandCheck.checkMatchingOptionalAndArgsParametrInList());
+        Assert.assertFalse(commandCheckForList.checkMatchingOptionalAndArgsParametr());
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expected = NullPointerException.class)
     public  void throwExceptionIfOptionalAndArgsParametrNotMatchInHelp(){
-        Assert.assertFalse(commandCheckForHelp.checkMatchingOptionalAndArgsParametrInHelp());
+        Assert.assertFalse(commandCheckForHelp.checkMatchingOptionalAndArgsParametr());
     }
 
     @Test(expected = AssertionError.class)
     public void throwExceptionIfMandatryArgumentsIsNull(){
-        Assert.assertNull(commandCheck.getMandatryArguments());
+        Assert.assertNull(commandCheckForAdd.getMandatoryArguments());
     }
-
-    @Test(expected = AssertionError.class)
-    public void throwExceptionIfNameOfMethodIsNull(){
-        Assert.assertNotEquals(initStringArgumentsOfParametrDefinition()[0],commandCheck.getNameOfMethod());
-    }
-
-
 
 }

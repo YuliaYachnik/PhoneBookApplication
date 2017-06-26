@@ -1,6 +1,5 @@
 package org;
 
-import org.check.Check;
 import org.check.CheckManager;
 import org.date.Data;
 import org.services.*;
@@ -34,8 +33,8 @@ public class PhoneBookApplication {
             Command  command = commandDefinitionMap.get(commandName).getCommand().newInstance();
             Data data = new Data();
             CommandCheckImpl commandCheck = new CommandCheckImpl(this.commandDefinitionMap.get(commandName).getParametrDefinitions(),params,args);
-            CheckManager checkManager = new CheckManager();
-            command.execute(checkManager.returnValideObject(commandCheck));
+            CheckManager checkManager = new CheckManager(commandCheck);
+            command.execute(checkManager.returnValidateObject());
         }catch (NullPointerException e){
             System.out.println("Such method no definite");
         }catch (ArrayIndexOutOfBoundsException e){
