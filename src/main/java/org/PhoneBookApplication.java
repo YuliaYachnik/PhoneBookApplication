@@ -41,6 +41,8 @@ public class PhoneBookApplication {
             System.out.println("Initializing parameters error");
         } catch (IllegalAccessException e) {
             System.out.println("Illegal access to class");
+        } catch (RuntimeException e){
+            System.out.println("Error with command line parametrs. Please, use help-manager.");
         }
     }
 }
