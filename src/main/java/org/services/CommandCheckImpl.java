@@ -43,7 +43,7 @@ public class CommandCheckImpl implements Check {
             }
     }
 
-    private boolean checkMatchingOptionalAndArgsParametrInAdd(){
+    public boolean checkMatchingOptionalAndArgsParametrInAdd(){
        if((getCommandArgumentsFromCommandLine().length == getMandatryArguments() + 1) && getOptionalParams() == null)
            return false;
        if((getCommandArgumentsFromCommandLine().length ==  getMandatryArguments() + 2 )&& getOptionalParams() == null)
@@ -53,7 +53,7 @@ public class CommandCheckImpl implements Check {
         else return false;
     }
 
-   private boolean checkMatchingOptionalAndArgsParametrInFind(){
+   public boolean checkMatchingOptionalAndArgsParametrInFind(){
         if((getCommandArgumentsFromCommandLine().length == getMandatryArguments() + 1) && getOptionalParams() == null)
             return false;
         if(getCommandArgumentsFromCommandLine().length ==  getMandatryArguments() + 2 && getOptionalParams() == null)
@@ -63,18 +63,18 @@ public class CommandCheckImpl implements Check {
         else return false;
    }
 
-   private boolean checkMatchingOptionalAndArgsParametrInList(){
+   public boolean checkMatchingOptionalAndArgsParametrInList(){
        if(getCommandArgumentsFromCommandLine().length == 1 && getOptionalParams() == null) return false;
        if(getCommandArgumentsFromCommandLine().length == 2 && getOptionalParams() == null) return false;
        if(getCommandArgumentsFromCommandLine().length < 4 ) return true;
        else return false;
    }
 
-   private boolean checkMatchingOptionalAndArgsParametrInHelp(){
+   public  boolean checkMatchingOptionalAndArgsParametrInHelp(){
        if(getCommandArgumentsFromCommandLine().length == 1) return true;
        else return false;
    }
-    private int getMandatryArguments(){
+    public  int getMandatryArguments(){
         int mandatoryCount = 0;
         for(int i = 0; i < getParametrDefinitions().size(); i++){
             if(getParametrDefinitions().get(i).isMandatory() == true)  mandatoryCount++;
@@ -85,7 +85,7 @@ public class CommandCheckImpl implements Check {
             throw new RuntimeException("Initializing parameters error. Please, use help-manager.");
     }
 
-    private String getNameOfMethod(){
+    public String getNameOfMethod(){
         String name = getCommandArgumentsFromCommandLine()[0];
         return name;
     }
