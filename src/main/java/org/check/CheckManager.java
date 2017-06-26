@@ -17,9 +17,6 @@ public class CheckManager {
     private CommandCheckImpl commandCheck;
     private Map<String,Data> matchMethodNameWithParser;
     private Data data;
-  /*  private  String stringArgsCheck[];
-    private List<ParametrDefinitions> parametrDefinitionsList;
-    private Map<String,String> optionalParams;*/
 
     public CheckManager(CommandCheckImpl commandCheck) {
         this.commandCheck = commandCheck;
@@ -87,115 +84,53 @@ public class CheckManager {
         return data;
     }
 
-   private Data addArgumentsIntoList( ){
-        Data data = null;
-        if(isOptionalNull() == true){
-            try {
-                String filename = getFileName(stringArgsCheck[1]);
-                String dirname = getFileDir(stringArgsCheck[2]);
-                data = new Data();
-                data.setFileName(filename);
-                data.setDirName(dirname);
-                return data;
-            } catch (Exception e) {
-                System.out.println("Incorrect data initializing. Please,use help-manager.");
+   private Data addArgumentsIntoList( ) throws Exception{
+        data = new Data();
+        if(isOptionalNull()){
+                data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[1]));
+                data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[2]));
+           }else{
+            if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 2){
+                if(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[1]) == null){
+                    data.setFileName(commandCheck.getOptionalParams().get("--filename"));
+                    data.setDirName (commandCheck.getCommandArgumentsFromCommandLine()[1]);
+
+                }else{
+                    data.setFileName (commandCheck.getCommandArgumentsFromCommandLine()[1]);
+                    data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
+                }
             }
-        }else{
-            return chooseVersionOfListing();
         }
         return data;
     }
 
-   private Data chooseVersionOfListing(){
-        Data data = null;
-        try {
-            if(countArguments(getStringArgsCheck()) == 1){
-                String filename = getOptionalParams().get("--filename");
-                String dirname = getOptionalParams().get("--dirname");
-                data = new Data();
-                data.setFileName(filename);
-                data.setDirName(dirname);
+    private Data addArgumentsIntoFind()throws Exception{
+        data = new Data();
+        data.setName(getName(commandCheck.getCommandArgumentsFromCommandLine()[1]));
+        if(isOptionalNull()) {
+            data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[2]));
+            data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[3]));
+        } else{
+            if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 2){
+                data.setFileName(commandCheck.getOptionalParams().get("--filename"));
+                data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
             }
-            if(countArguments(getStringArgsCheck()) == 2){
-                String filename = getFileName(getStringArgsCheck()[1]);
-                String dirname = getOptionalParams().get("--dirname");
-                data = new Data();
-                data.setFileName(filename);
-                data.setDirName(dirname);
+            if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 3){
+                if(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[2] )== null){
+                    data.setFileName(commandCheck.getOptionalParams().get("--filename"));
+                    data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[2]));
+                }else{
+                    data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[2]));
+                    data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
+                }
             }
-            if(countArguments(getStringArgsCheck()) == 3){
-                String filename = getFileName(getStringArgsCheck()[1]);
-                String dirname = getFileDir(getStringArgsCheck()[2]);
-                data = new Data();
-                data.setFileName(filename);
-                data.setDirName(dirname);
+            if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 4){
+                data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[2]));
+                data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[3]));
             }
-        } catch (Exception e) {
-            System.out.println("Incorrect data initializing. Please,use help-manager.");
         }
         return data;
     }
-
-    private Data addArgumentsIntoFind( ){
-        Data data = null;
-        if(isOptionalNull() == true){
-            try {
-                String name = getName(stringArgsCheck[1]);
-                String filename = getFileName(stringArgsCheck[3]);
-                String dirname = getFileDir(stringArgsCheck[4]);
-                data = new Data();
-                data.setName(name);
-                data.setFileName(filename);
-                data.setDirName(dirname);
-                return data;
-
-            } catch (Exception e) {
-                System.out.println("Incorrect data initializing. Please,use help-manager.");
-            }
-        }else{
-            return chooseVersionOfFinding();
-        }
-        return data;
-    }
-
-    private Data chooseVersionOfFinding(){
-        Data data = null;
-        try {
-            if(countArguments(getStringArgsCheck()) == 2) {
-                String name = getName(getStringArgsCheck()[1]);
-                String filename = getOptionalParams().get("--filename");
-                String dirname = getOptionalParams().get("--dirname");
-                data = new Data();
-                data.setName(name);
-                data.setFileName(filename);
-                data.setDirName(dirname);
-            }
-            if(countArguments(getStringArgsCheck()) == 3){
-                String name = getName(getStringArgsCheck()[1]);
-                String filename = getFileName(getStringArgsCheck()[2]);
-                String dirname = getOptionalParams().get("--dirname");
-                data = new Data();
-                data.setName(name);
-                data.setFileName(filename);
-                data.setDirName(dirname);
-            }
-            if(countArguments(getStringArgsCheck()) == 4){
-                String name = getName(getStringArgsCheck()[1]);
-                String filename = getFileName(getStringArgsCheck()[2]);
-                String dirname = getFileDir(getStringArgsCheck()[3]);
-                data = new Data();
-                data.setName(name);
-                data.setFileName(filename);
-                data.setDirName(dirname);
-            }
-        } catch (Exception e) {
-            System.out.println("Incorrect data initializing. Please,use help-manager.");
-        }
-        return data;
-    }
-
-
-
 
     private int countArguments(String arguments[]){
         return arguments.length;
