@@ -42,10 +42,10 @@ public class ApplicationEntryPoint {
         matchOptionalParametrsWithDefaultValue.put("--dirname","phonebook");
 
 
-        Class commandAdd  =  AddCommandImpl.class;//перенести в метод
-        Class commandFind = FindCommandImpl.class;//перенести в метод
-        Class commandList = ListCommandImpl.class;//перенести в метод
-        Class commandHelp = HelpCommandImpl.class;//перенести в метод
+        Class commandAdd  =  AddCommandImpl.class;
+        Class commandFind = FindCommandImpl.class;
+        Class commandList = ListCommandImpl.class;
+        Class commandHelp = HelpCommandImpl.class;
 
 
         PhoneBookApplication phoneBookApplication = new PhoneBookApplicationBuilder()

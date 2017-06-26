@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class AddCommandImpl implements Command {
 
-    public void execute(Data data) { //передавать объект с валидными полями
+    public void execute(Data data) {
         List<Data> persons = new ArrayList<>();
         persons.add(data);
         FileWorker fileWorker = new FileWorker();

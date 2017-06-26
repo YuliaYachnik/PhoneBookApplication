@@ -21,6 +21,6 @@ public class ParametrDefinitions {
         this.isMandatory = isMandatory;
     }
 
-    }
+}
 
 
