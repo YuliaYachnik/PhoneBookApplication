@@ -38,12 +38,12 @@ public class CheckTest {
 
     @Test(expected = NullPointerException.class)
     public void throwExceptionIfStringArgsIsNull(){
-     Assert.assertFalse(check.check(initListOfParametrDefinition(),null));
+     //Assert.assertFalse(check.check(initListOfParametrDefinition(),null));
     }
 
     @Test(expected = NullPointerException.class)
     public void throwExceptionIfListArgsIsNull(){
-        Assert.assertFalse(check.check(null,initStringArgumentsOfParametrDefinition()));
+        //Assert.assertFalse(check.check(null,initStringArgumentsOfParametrDefinition()));
     }
 
 

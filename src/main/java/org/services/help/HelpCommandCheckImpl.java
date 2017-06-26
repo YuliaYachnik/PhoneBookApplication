@@ -17,7 +17,7 @@ public class HelpCommandCheckImpl implements Check {
     }
 
     @Override
-    public boolean check( List<ParametrDefinitions> parametrDefinitions, String args[]) {
+    public boolean check( List<ParametrDefinitions> parametrDefinitions, Map<String,String> optionalParams,String args[]) {
         this.checkHelpCommandReceiver.checkHelpCommand();
         return true;
 

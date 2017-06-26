@@ -30,7 +30,7 @@ public class PhoneBookApplication {
             String commandName = args[0];
             Command  command = commandDefinitionMap.get(commandName).getCommand().newInstance();
             Data data = new Data();
-            CommandCheckImpl commandCheck = new CommandCheckImpl(this.commandDefinitionMap.get(commandName).getParametrDefinitions(),args);
+            CommandCheckImpl commandCheck = new CommandCheckImpl(this.commandDefinitionMap.get(commandName).getParametrDefinitions(),params,args);
             CheckManager checkManager = new CheckManager();
             command.execute(checkManager.returnValideObject(commandCheck));
         }catch (NullPointerException e){
