@@ -2,15 +2,12 @@ package org.services.find;
 
 import org.date.Data;
 import org.fileworking.FileWorker;
-import org.services.CheckManager;
 import org.services.Command;
 
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Юлия on 16.06.2017.
