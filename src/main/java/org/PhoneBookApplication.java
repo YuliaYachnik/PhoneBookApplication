@@ -3,6 +3,7 @@ package org;
 import org.date.Data;
 import org.services.*;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,8 @@ public class PhoneBookApplication {
             System.out.println("Illegal access to class");
         } catch (RuntimeException e){
             System.out.println("Error with command line parametrs. Please, use help-manager.");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
         }
     }
 }

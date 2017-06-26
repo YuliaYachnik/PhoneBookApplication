@@ -92,6 +92,13 @@ public class CheckManager {
     private Data chooseVersionOfListing(){
         Data data = null;
         try {
+            if(countArguments(getStringArgsCheck()) == 1){
+                String filename = getOptionalParams().get("--filename");
+                String dirname = getOptionalParams().get("--dirname");
+                data = new Data();
+                data.setFileName(filename);
+                data.setDirName(dirname);
+            }
             if(countArguments(getStringArgsCheck()) == 2){
                 String filename = getFileName(getStringArgsCheck()[1]);
                 String dirname = getOptionalParams().get("--dirname");

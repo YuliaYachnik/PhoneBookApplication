@@ -5,7 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -36,15 +38,26 @@ public class CheckTest {
      return parametrDefinitionsList;
     }
 
+    public Map<String,String> initOptionalParamentrs(){
+        Map<String,String> optionalParametrs = new HashMap<>();
+        optionalParametrs.put("--filename","phonebook.txt");
+        optionalParametrs.put("--dirname","phonebook");
+        return optionalParametrs;
+    }
+
     @Test(expected = NullPointerException.class)
     public void throwExceptionIfStringArgsIsNull(){
-     //Assert.assertFalse(check.check(initListOfParametrDefinition(),null));
+     Assert.assertFalse(check.check(initListOfParametrDefinition(),initOptionalParamentrs(),initStringArgumentsOfParametrDefinition()));
     }
 
     @Test(expected = NullPointerException.class)
     public void throwExceptionIfListArgsIsNull(){
-        //Assert.assertFalse(check.check(null,initStringArgumentsOfParametrDefinition()));
+        Assert.assertFalse(check.check(null,initOptionalParamentrs(),initStringArgumentsOfParametrDefinition()));
     }
 
-
+    @Test(expected = NullPointerException.class)
+    public void throwExceptionOptionalParametrsIsNull(){
+        Assert.assertFalse(check.check(initListOfParametrDefinition(),null,initStringArgumentsOfParametrDefinition()));
+    }
+    
 }

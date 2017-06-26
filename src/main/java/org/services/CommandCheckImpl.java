@@ -35,7 +35,7 @@ public class CommandCheckImpl implements Check {
 
     @Override
     public boolean check(List<ParametrDefinitions> parametrDefinitions,Map<String,String> optionalParams, String args[]) {
-            if (parametrDefinitions == null || args == null || args.length > 5){
+            if (parametrDefinitions == null || args == null || optionalParams == null || args.length > 5){
                 throw new NullPointerException("Parametrs are not valid! Please, use help-manager");
             } else{
                if( chooseVersionOfParsing(getNameOfMethod())== true) return true;

@@ -58,7 +58,6 @@ public class FileWorker {
         } finally {
             try {
                 bufferedReader.close();
-
             } catch (IOException ex) {
                 System.out.println("Exception with reading from file. Please,use help-manager");
                 return null;
@@ -67,20 +66,20 @@ public class FileWorker {
 
     }
 
-    public ArrayList<Data> findInFile(String name, String fileName, String dirName) throws FileNotFoundException, UnsupportedEncodingException {
-        File folder = new File(pass + dirName + File.separator + fileName);
-        Data data;
+    public ArrayList<Data> findInFile(Data data) throws FileNotFoundException, UnsupportedEncodingException {
+        File folder = new File(pass + data.getDirName() + File.separator + data.getFileName());
         BufferedReader bufferedReader = new BufferedReader(new FileReader(folder));
         try {
+            Data finddata;
             ArrayList<Data> personList = new ArrayList<Data>();
             ArrayList<String> str = new ArrayList<String>();
             if (!folder.exists()) throw new FileNotFoundException();
             String buf;
             while ((buf = bufferedReader.readLine()) != null) {
-                str = parseStringtoArrayWithFind(buf, name);
+                str = parseStringtoArrayWithFind(buf, data.getName());
                 if (str != null) {
-                    data = new Data(str.get(0), str.get(1), fileName, dirName);
-                    personList.add(data);
+                    finddata = new Data(str.get(0), str.get(1), data.getFileName(), data.getDirName());
+                    personList.add(finddata);
                 }
             }
             return personList;
