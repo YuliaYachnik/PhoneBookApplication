@@ -15,33 +15,26 @@ import java.util.regex.Pattern;
  */
 public class CheckManager {
     private CommandCheckImpl commandCheck;
-    private Map<String,Data> matchMethodNameWithParser;
     private Data data;
 
     public CheckManager(CommandCheckImpl commandCheck) {
         this.commandCheck = commandCheck;
-        matchMethodNameWithParser = new HashMap<>();
-        try {
-            matchMethodNameWithParser.put("add", addArgumentsIntoAdd());
-            matchMethodNameWithParser.put("help",addArgumentsIntoHelp());
-            matchMethodNameWithParser.put("list",addArgumentsIntoList());
-            matchMethodNameWithParser.put("find",addArgumentsIntoFind());
-        } catch (Exception e) {
-            System.out.println("Error with command line parametrs. Please, use help-manager.");
-        }
-
     }
 
-    public Map<String, Data> getMatchMethodNameWithParser() {
-        return matchMethodNameWithParser;
-    }
-
-    public Data returnValidateObject()throws InstantiationException, IllegalAccessException{
+    public Data returnValidateObject() throws Exception {
         if(commandCheck.check(commandCheck.getParametrDefinitions(),commandCheck.getOptionalParams(),commandCheck.getCommandArgumentsFromCommandLine()) == true){
-            return getMatchMethodNameWithParser().get(commandCheck.getCommandArgumentsFromCommandLine()[0]);
+            chooseMethodName(commandCheck.getCommandArgumentsFromCommandLine()[0]);
+            return data;
         }else {
             throw new RuntimeException("Error with command line parametrs. Please, use help-manager.");
         }
+    }
+
+    public void chooseMethodName(String name) throws Exception {
+        if(name.equals("add")) addArgumentsIntoAdd();
+        if(name.equals("find")) addArgumentsIntoFind();
+        if(name.equals("list")) addArgumentsIntoList();
+        if(name.equals("help")) addArgumentsIntoHelp();
     }
 
     private Data addArgumentsIntoHelp(){
@@ -67,12 +60,12 @@ public class CheckManager {
                 data.setDirName (commandCheck.getOptionalParams().get("--dirname"));
             }
             if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 4){
-                if(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[4]) == null)
+                if(commandCheck.getCommandArgumentsFromCommandLine()[3].contains("--dirname"))
                 {
                     data.setFileName(commandCheck.getOptionalParams().get("--filename"));
-                    data.setDirName (commandCheck.getCommandArgumentsFromCommandLine()[3]);
+                    data.setDirName (getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[3]));
                 }else{
-                    data.setFileName (commandCheck.getCommandArgumentsFromCommandLine()[3]);
+                    data.setFileName (getFileName(commandCheck.getCommandArgumentsFromCommandLine()[3]));
                     data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
                 }
             }
@@ -91,14 +84,17 @@ public class CheckManager {
                 data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[2]));
            }else{
             if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 2){
-                if(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[1]) == null){
+                if(commandCheck.getCommandArgumentsFromCommandLine()[1].contains("--dirname")){
                     data.setFileName(commandCheck.getOptionalParams().get("--filename"));
                     data.setDirName (commandCheck.getCommandArgumentsFromCommandLine()[1]);
 
                 }else{
-                    data.setFileName (commandCheck.getCommandArgumentsFromCommandLine()[1]);
+                    data.setFileName (getFileName(commandCheck.getCommandArgumentsFromCommandLine()[1]));
                     data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
                 }
+            }else{
+                data.setFileName(commandCheck.getOptionalParams().get("--filename"));
+                data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
             }
         }
         return data;

@@ -47,6 +47,8 @@ public class PhoneBookApplication {
             System.out.println("Error with command line parametrs. Please, use help-manager.");
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
