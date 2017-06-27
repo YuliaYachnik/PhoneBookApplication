@@ -37,7 +37,7 @@ public class CheckManager {
         if(name.equals("help")) addArgumentsIntoHelp();
     }
 
-    private Data addArgumentsIntoHelp(){
+    public  Data addArgumentsIntoHelp(){
         Data data = new Data();
         return data;
     }
@@ -47,7 +47,7 @@ public class CheckManager {
         else  return false;
     }
 
-    private Data addArgumentsIntoAdd() throws Exception{
+    public Data addArgumentsIntoAdd() throws Exception{
        data = new Data();
        data.setName(getName(commandCheck.getCommandArgumentsFromCommandLine()[1]));
         data.setPhone(getPhone(commandCheck.getCommandArgumentsFromCommandLine()[2]));
@@ -77,7 +77,7 @@ public class CheckManager {
         return data;
     }
 
-   private Data addArgumentsIntoList( ) throws Exception{
+   public Data addArgumentsIntoList( ) throws Exception{
         data = new Data();
         if(isOptionalNull()){
                 data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[1]));
@@ -100,7 +100,7 @@ public class CheckManager {
         return data;
     }
 
-    private Data addArgumentsIntoFind()throws Exception{
+    public Data addArgumentsIntoFind()throws Exception{
         data = new Data();
         data.setName(getName(commandCheck.getCommandArgumentsFromCommandLine()[1]));
         if(isOptionalNull()) {
@@ -128,7 +128,7 @@ public class CheckManager {
         return data;
     }
 
-    private int countArguments(String arguments[]){
+    public int countArguments(String arguments[]){
         return arguments.length;
     }
 

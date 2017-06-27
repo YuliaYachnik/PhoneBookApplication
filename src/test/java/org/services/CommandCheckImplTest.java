@@ -8,9 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Юлия on 26.06.2017.
- */
+
 public class CommandCheckImplTest {
     List<ParametrDefinitions> parametrDefinitionsList;
     ParametrDefinitions name  = new ParametrDefinitions("name",true);
@@ -102,6 +100,26 @@ public class CommandCheckImplTest {
     @Test(expected = AssertionError.class)
     public void throwExceptionIfMandatryArgumentsIsNull(){
         Assert.assertNull(commandCheckForAdd.getMandatoryArguments());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void throwExceptionIfNotCheckHelpArguments(){
+        Assert.assertFalse(commandCheckForHelp.checkHelp());
+    }
+
+    @Test(expected = AssertionError.class)
+    public void throwExceptionIfAddNotCheckGeneralRule(){
+        Assert.assertFalse(commandCheckForAdd.generalRuleCheck());
+    }
+
+    @Test(expected = AssertionError.class)
+    public void throwExceptionIfFindNotCheckGeneralRule(){
+        Assert.assertFalse(commandCheckForFind.generalRuleCheck());
+    }
+
+    @Test(expected = AssertionError.class)
+    public void throwExceptionIfListNotCheckGeneralRule(){
+        Assert.assertFalse(commandCheckForList.generalRuleCheck());
     }
 
 }

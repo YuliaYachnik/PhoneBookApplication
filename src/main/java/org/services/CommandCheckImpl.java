@@ -59,7 +59,7 @@ public class CommandCheckImpl implements Check {
         else return false;
     }
 
-    public boolean generalRullCheck() {
+    public boolean generalRuleCheck() {
         if (getCommandArgumentsFromCommandLine().length < getMandatoryArguments() + 1 || getCommandArgumentsFromCommandLine().length > getParametrDefinitions().size() + 1)
             return false;
         else return true;
@@ -67,7 +67,7 @@ public class CommandCheckImpl implements Check {
 
     public boolean checkMatchingOptionalAndArgsParametr() {
 
-        if (generalRullCheck() == true || checkHelp() == true) {
+        if (generalRuleCheck() == true || checkHelp() == true) {
             if ((getCommandArgumentsFromCommandLine().length >= getMandatoryArguments() + 1) && getOptionalParams() == null)
                 return false;
             return true;
