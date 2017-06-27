@@ -7,11 +7,6 @@ public class ParametrDefinitions {
     private String name;
     private boolean isMandatory;
 
-
-    public String getName() {
-        return name;
-    }
-
     public boolean isMandatory() {
         return isMandatory;
     }
@@ -20,7 +15,6 @@ public class ParametrDefinitions {
         this.name = name;
         this.isMandatory = isMandatory;
     }
-
 }
 
 

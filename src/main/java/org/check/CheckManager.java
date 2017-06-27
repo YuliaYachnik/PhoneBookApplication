@@ -147,7 +147,7 @@ public class CheckManager {
             return returnName;
         } else {
             throw new Exception("Incorrect name data.Please,use help-manager.");
-        }
+       }
     }
 
     public static boolean checkPhoneSymbol(String str) {

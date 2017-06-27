@@ -21,9 +21,9 @@ public class AddCommandImpl implements Command {
         try {
             fileWorker.writeFile(data);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Not a valid path to file.Please,use help-manager");
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            System.out.println("Error with writing data to file. Please,use help-manager");
         }
     }
 }
