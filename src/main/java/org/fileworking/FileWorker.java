@@ -22,6 +22,7 @@ public class FileWorker {
         } finally {
                 bufferedWriter.close();
                 fileOutputStream.close();
+            System.out.println("Successful add to Phonebook");
         }
     }
 

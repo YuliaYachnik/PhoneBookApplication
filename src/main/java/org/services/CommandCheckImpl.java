@@ -36,7 +36,7 @@ public class CommandCheckImpl implements Check {
 
     @Override
     public boolean check(List<ParametrDefinitions> parametrDefinitions, Map<String, String> optionalParams, String args[]) throws NullPointerException{
-        if (parametrDefinitions == null || args == null || optionalParams == null || args.length > 5) {
+        if (parametrDefinitions == null || args == null || args.length > 5) {
             throw new NullPointerException("Parametrs are not valid! Please, use help-manager");
         } else {
             if (checkMatchingOptionalAndArgsParametr())
@@ -66,12 +66,7 @@ public class CommandCheckImpl implements Check {
     }
 
     public boolean checkMatchingOptionalAndArgsParametr() {
-
-        if (generalRuleCheck() || checkHelp()) {
-            if ((getCommandArgumentsFromCommandLine().length >= getMandatoryArguments() + 1) && getOptionalParams() == null)
-                return false;
-            return true;
-        }
+        if (generalRuleCheck() || checkHelp()) return true;
         return false;
     }
 }

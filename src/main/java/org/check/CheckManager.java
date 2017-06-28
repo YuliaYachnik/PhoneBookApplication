@@ -2,12 +2,7 @@ package org.check;
 
 import org.date.Data;
 import org.services.CommandCheckImpl;
-import org.services.ParametrDefinitions;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.DataFormatException;
@@ -49,84 +44,72 @@ public class CheckManager {
         else  return false;
     }
 
-    public Data addArgumentsIntoAdd() throws Exception{
-       data = new Data();
-       data.setName(getName(commandCheck.getCommandArgumentsFromCommandLine()[1]));
-        data.setPhone(getPhone(commandCheck.getCommandArgumentsFromCommandLine()[2]));
-        if(isOptionalNull()) {
-           data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[3]));
-            data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[4]));
-        }else{
-            if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 3){
-                data.setFileName(commandCheck.getOptionalParams().get("--filename"));
-                data.setDirName (commandCheck.getOptionalParams().get("--dirname"));
-            }
-            if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 4){
-                if(commandCheck.getCommandArgumentsFromCommandLine()[3].contains("--dirname"))
-                {
-                    data.setFileName(commandCheck.getOptionalParams().get("--filename"));
-                    data.setDirName (getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[3]));
-                }else{
-                    data.setFileName (getFileName(commandCheck.getCommandArgumentsFromCommandLine()[3]));
-                    data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
-                }
-            }
-            if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 5){
-                data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[3]));
-                data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[4]));
-            }
-        }
-        return data;
-    }
-
-   public Data addArgumentsIntoList( ) throws Exception{
+    public Data addArgumentsIntoAdd() throws DataFormatException{
         data = new Data();
-        if(isOptionalNull()){
-                data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[1]));
-                data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[2]));
-           }else{
-            if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 2){
-                if(commandCheck.getCommandArgumentsFromCommandLine()[1].contains("--dirname")){
-                    data.setFileName(commandCheck.getOptionalParams().get("--filename"));
-                    data.setDirName (commandCheck.getCommandArgumentsFromCommandLine()[1]);
-
-                }else{
-                    data.setFileName (getFileName(commandCheck.getCommandArgumentsFromCommandLine()[1]));
-                    data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
-                }
+        for(int i = 0; i < commandCheck.getParametrDefinitions().size(); i++){
+            if(commandCheck.getParametrDefinitions().get(i).isMandatory()){
+                if(commandCheck.getParametrDefinitions().get(i).getName().contains("name"))
+                 data.setName(getName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
+                else
+                    data.setPhone(getPhone(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
             }else{
-                data.setFileName(commandCheck.getOptionalParams().get("--filename"));
-                data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
+               if(commandCheck.getCommandArgumentsFromCommandLine().length > commandCheck.getParametrDefinitions().size())
+                   OptionalInCommandLine();
+                else
+                    NotOptionalInCommandLine();
             }
         }
         return data;
     }
 
-    public Data addArgumentsIntoFind()throws Exception{
+    public Data addArgumentsIntoList()throws DataFormatException{
         data = new Data();
-        data.setName(getName(commandCheck.getCommandArgumentsFromCommandLine()[1]));
-        if(isOptionalNull()) {
-            data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[2]));
-            data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[3]));
-        } else{
-            if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 2){
-                data.setFileName(commandCheck.getOptionalParams().get("--filename"));
-                data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
-            }
-            if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 3){
-                if(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[2] )== null){
-                    data.setFileName(commandCheck.getOptionalParams().get("--filename"));
-                    data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[2]));
-                }else{
-                    data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[2]));
-                    data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
-                }
-            }
-            if(countArguments(commandCheck.getCommandArgumentsFromCommandLine()) == 4){
-                data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[2]));
-                data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[3]));
+        for(int i = 0; i < commandCheck.getParametrDefinitions().size(); i++){
+            if(!commandCheck.getParametrDefinitions().get(i).isMandatory()){
+                if(commandCheck.getCommandArgumentsFromCommandLine().length > commandCheck.getParametrDefinitions().size())
+                    OptionalInCommandLine();
+                else
+                    NotOptionalInCommandLine();
             }
         }
+        return data;
+    }
+
+    public Data addArgumentsIntoFind() throws DataFormatException{
+        data = new Data();
+        for(int i = 0; i < commandCheck.getParametrDefinitions().size(); i++){
+            if(commandCheck.getParametrDefinitions().get(i).isMandatory()){
+                if(commandCheck.getParametrDefinitions().get(i).getName().contains("name"))
+                    data.setName(getName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
+            }else{
+                if(commandCheck.getCommandArgumentsFromCommandLine().length > commandCheck.getParametrDefinitions().size())
+                    OptionalInCommandLine();
+                else
+                    NotOptionalInCommandLine();
+            }
+        }
+        return data;
+    }
+
+    public Data NotOptionalInCommandLine() throws DataFormatException{
+        for(int i = 0;i < commandCheck.getParametrDefinitions().size(); i++){
+            if(!commandCheck.getParametrDefinitions().get(i).isMandatory()){
+                if(commandCheck.getParametrDefinitions().get(i).getName().contains("filename"))
+                    data.setFileName(commandCheck.getOptionalParams().get("--filename"));
+                else
+                    data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
+            }
+        }
+        return data;
+    }
+    public Data OptionalInCommandLine() throws DataFormatException{
+        for(int i = 0;i < commandCheck.getParametrDefinitions().size(); i++){
+            if(!commandCheck.getParametrDefinitions().get(i).isMandatory()){
+                if(commandCheck.getParametrDefinitions().get(i).getName().contains("filename"))
+                    data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
+                else
+                    data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));}
+            }
         return data;
     }
 
