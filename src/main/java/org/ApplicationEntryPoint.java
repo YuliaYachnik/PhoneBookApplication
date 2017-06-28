@@ -7,6 +7,7 @@ import org.services.find.FindCommandImpl;
 import org.services.help.HelpCommandImpl;
 import org.services.list.ListCommandImpl;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -15,41 +16,26 @@ import java.util.*;
 public class ApplicationEntryPoint {
     public static void main(String args[]) throws ClassNotFoundException {
 
-        List <ParametrDefinitions> addParametrDefinitionsList = new ArrayList <ParametrDefinitions> ();
-        List <ParametrDefinitions> findParametrDefinitionsList = new ArrayList<>();
-        List <ParametrDefinitions> listParametrDefinitionsList = new ArrayList<>();
-        List <ParametrDefinitions> helpParametrDefinitionsList = new ArrayList<>();
-
         ParametrDefinitions nameParametrDefinitions = new ParametrDefinitions("name",true);
         ParametrDefinitions phoneParametrDefinitions = new ParametrDefinitions("phone",true);
         ParametrDefinitions fileParametrDefinitions = new ParametrDefinitions("filename", false);
         ParametrDefinitions dirParametrDefinitions = new ParametrDefinitions("dirname",false);
 
-        //СДЕЛАТЬ ИНИЦИАЛИЗАЦИЮ ЛИСТА БЕЗ ADD
-        addParametrDefinitionsList.add(nameParametrDefinitions);
-        addParametrDefinitionsList.add(phoneParametrDefinitions);
-        addParametrDefinitionsList.add(fileParametrDefinitions);
-        addParametrDefinitionsList.add(dirParametrDefinitions);
+        List <ParametrDefinitions> addParametrDefinitionsList = Arrays.asList(nameParametrDefinitions,phoneParametrDefinitions,fileParametrDefinitions,dirParametrDefinitions);
+        List <ParametrDefinitions> findParametrDefinitionsList = Arrays.asList(nameParametrDefinitions,fileParametrDefinitions,dirParametrDefinitions);
+        List <ParametrDefinitions> listParametrDefinitionsList = Arrays.asList(fileParametrDefinitions,dirParametrDefinitions);
+        List <ParametrDefinitions> helpParametrDefinitionsList = new ArrayList<>();
 
-        findParametrDefinitionsList.add(nameParametrDefinitions);
-        findParametrDefinitionsList.add(fileParametrDefinitions);
-        findParametrDefinitionsList.add(dirParametrDefinitions);
-
-        listParametrDefinitionsList.add(fileParametrDefinitions);
-        listParametrDefinitionsList.add(dirParametrDefinitions);
-
-        Map<String,String>  matchOptionalParametrsWithDefaultValue = new HashMap<String, String>();
+        Map<String,String>  matchOptionalParametrsWithDefaultValue = new HashMap<>();
         matchOptionalParametrsWithDefaultValue.put("--filename","phonebook.txt");
         matchOptionalParametrsWithDefaultValue.put("--dirname","phonebook");
-
 
         //ЗАПИСАТЬ СРАЗУ В МЕТОД
         Class commandAdd  =  AddCommandImpl.class;
         Class commandFind = FindCommandImpl.class;
         Class commandList = ListCommandImpl.class;
         Class commandHelp = HelpCommandImpl.class;
-
-
+        
         PhoneBookApplication phoneBookApplication = new PhoneBookApplicationBuilder()
                     .withCommands(new CommandDefinition("add", addParametrDefinitionsList, commandAdd))
                     .withCommands(new CommandDefinition("find", findParametrDefinitionsList, commandFind))
