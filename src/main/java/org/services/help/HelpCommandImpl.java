@@ -3,9 +3,6 @@ package org.services.help;
 import org.date.Data;
 import org.services.Command;
 
-/**
- * Created by Юлия on 16.06.2017.
- */
 public class HelpCommandImpl implements Command {
     private  String messege = "\t\t\tWelcome to the Help-manager!\t\t\t" +
             "\n\t This application works with the phonebook.\t\n" +

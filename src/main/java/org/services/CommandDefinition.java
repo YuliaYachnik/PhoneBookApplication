@@ -3,9 +3,6 @@ package org.services;
 import java.lang.*;
 import java.util.List;
 
-/**
- * Created by Юлия on 19.06.2017.
- */
 public class CommandDefinition {
     private String name;
     private List<ParametrDefinitions> parametrDefinitions;

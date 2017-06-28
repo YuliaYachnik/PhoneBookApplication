@@ -1,15 +1,10 @@
 package org;
 
-import org.services.Command;
 import org.services.CommandDefinition;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Юлия on 19.06.2017.
- */
 public class PhoneBookApplicationBuilder {
     private List<CommandDefinition> commandDefinition =  new ArrayList<CommandDefinition>();
     private Map<String,String> params;

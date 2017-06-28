@@ -6,9 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.DataFormatException;
 
-/**
- * Created by Юлия on 26.06.2017.
- */
 public class CheckManager {
     private CommandCheckImpl commandCheck;
     private Data data;

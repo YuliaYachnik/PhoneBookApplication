@@ -3,16 +3,9 @@ package org.services.find;
 import org.date.Data;
 import org.fileworking.FileWorker;
 import org.services.Command;
-
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-/**
- * Created by Юлия on 16.06.2017.
- */
 public class FindCommandImpl implements Command{
     private ArrayList<Data> personFindOut = new ArrayList<Data>();
 

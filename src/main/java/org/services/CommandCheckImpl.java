@@ -4,9 +4,6 @@ import org.check.Check;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Юлия on 20.06.2017.
- */
 public class CommandCheckImpl implements Check {
     private List<ParametrDefinitions> parametrDefinitions;
     private Map<String, String> optionalParams;

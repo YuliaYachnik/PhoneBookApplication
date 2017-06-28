@@ -1,8 +1,5 @@
 package org.services;
 
-/**
- * Created by Юлия on 19.06.2017.
- */
 public class ParametrDefinitions {
     private String name;
     private boolean isMandatory;
