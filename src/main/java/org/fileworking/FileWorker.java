@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class FileWorker {
     private String pass = "E:/";
 
-    public void writeFile(Data data) throws FileNotFoundException, UnsupportedEncodingException {
+    public void writeFile(Data data) throws IOException {
         File folder = new File(pass + data.getDirName());
         if (!folder.exists()){
             folder.mkdir();
@@ -19,20 +19,13 @@ public class FileWorker {
             bufferedWriter.append(" - ");
             bufferedWriter.append(data.getPhone());
             bufferedWriter.newLine();
-        } catch (IOException e) {
-            System.out.println("Error with writing data to file.Please,use help-manager");
-        }finally {
-            try {
+        } finally {
                 bufferedWriter.close();
                 fileOutputStream.close();
-                System.out.println("Successfull writing to file");
-            } catch (IOException e) {
-                System.out.println("Error with writing data to file. Please,use help-manager");
-            }
         }
     }
 
-    public ArrayList<Data> readFile(String fileName, String dirName) throws FileNotFoundException {
+    public ArrayList<Data> readFile(String fileName, String dirName) throws IOException{
         File folder = new File(pass + dirName + File.separator + fileName);
         Data data;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(folder));
@@ -49,24 +42,12 @@ public class FileWorker {
                 }
             }
             return personList;
-        } catch (FileNotFoundException e) {
-            System.out.println("Not a valid path to file.Please,use help-manager");
-            return null;
-        } catch (IOException ex) {
-            System.out.println("Exception with reading from file. Please,use help-manager");
-            return null;
         } finally {
-            try {
-                bufferedReader.close();
-            } catch (IOException ex) {
-                System.out.println("Exception with reading from file. Please,use help-manager");
-                return null;
-            }
+            bufferedReader.close();
         }
-
     }
 
-    public ArrayList<Data> findInFile(Data data) throws FileNotFoundException, UnsupportedEncodingException {
+    public ArrayList<Data> findInFile(Data data) throws IOException{
         File folder = new File(pass + data.getDirName() + File.separator + data.getFileName());
         BufferedReader bufferedReader = new BufferedReader(new FileReader(folder));
         try {
@@ -83,22 +64,11 @@ public class FileWorker {
                 }
             }
             return personList;
-        } catch (FileNotFoundException e) {
-            System.out.println("Not a valid path to file.Please,use help-manager");
-            return null;
-        } catch (IOException ex) {
-            System.out.println("Exception with reading from file. Please,use help-manager");
-            return null;
-        } finally {
-            try {
+        }  finally {
                 bufferedReader.close();
-
-            } catch (IOException ex) {
-                System.out.println("Exception with reading from file. Please,use help-manager");
-                return null;
-            }
         }
     }
+
 
     public ArrayList<String> parseStringtoArrayWithFind(String str, String name) {
         ArrayList<String> strings = new ArrayList<String>();

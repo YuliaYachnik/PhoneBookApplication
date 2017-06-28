@@ -4,6 +4,7 @@ import org.date.Data;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +13,7 @@ public class FindCommandImplTest {
     FindCommandImpl findCommand = new FindCommandImpl();
 
     @Test
-    public void checkFindInFile() throws FileNotFoundException {
+    public void checkFindInFile() throws IOException {
         findCommand.execute(data);
     }
 }

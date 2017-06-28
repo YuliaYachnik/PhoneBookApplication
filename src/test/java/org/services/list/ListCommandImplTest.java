@@ -3,6 +3,8 @@ package org.services.list;
 import org.date.Data;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class ListCommandImplTest {
@@ -10,7 +12,7 @@ public class ListCommandImplTest {
     ListCommandImpl listCommand = new ListCommandImpl();
 
     @Test
-    public void checkLReadFromFile(){
+    public void checkLReadFromFile() throws IOException{
         listCommand.execute(data);
     }
 

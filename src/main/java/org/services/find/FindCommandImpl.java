@@ -6,6 +6,7 @@ import org.services.Command;
 
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
@@ -15,8 +16,7 @@ import java.util.ArrayList;
 public class FindCommandImpl implements Command{
     private ArrayList<Data> personFindOut = new ArrayList<Data>();
 
-    public void execute(Data data) throws FileNotFoundException{
-        try {
+    public void execute(Data data) throws IOException{
             FileWorker fileWorker = new FileWorker();
             personFindOut = fileWorker.findInFile(data);
             if (personFindOut.size() != 0) {
@@ -24,13 +24,7 @@ public class FindCommandImpl implements Command{
                     System.out.println(personFindOut.get(i));
                 }
             } else System.out.println("No data found! Please, use help-manager.");
-        }catch (FileNotFoundException e){
-            System.out.println("File not found!");
-        }catch (UnsupportedEncodingException e){
-            System.out.println("Unsupported Encoding!");
-        }
     }
-
-    }
+}
 
 

@@ -25,6 +25,7 @@ public class ApplicationEntryPoint {
         ParametrDefinitions fileParametrDefinitions = new ParametrDefinitions("filename", false);
         ParametrDefinitions dirParametrDefinitions = new ParametrDefinitions("dirname",false);
 
+        //СДЕЛАТЬ ИНИЦИАЛИЗАЦИЮ ЛИСТА БЕЗ ADD
         addParametrDefinitionsList.add(nameParametrDefinitions);
         addParametrDefinitionsList.add(phoneParametrDefinitions);
         addParametrDefinitionsList.add(fileParametrDefinitions);
@@ -42,6 +43,7 @@ public class ApplicationEntryPoint {
         matchOptionalParametrsWithDefaultValue.put("--dirname","phonebook");
 
 
+        //ЗАПИСАТЬ СРАЗУ В МЕТОД
         Class commandAdd  =  AddCommandImpl.class;
         Class commandFind = FindCommandImpl.class;
         Class commandList = ListCommandImpl.class;
@@ -49,7 +51,7 @@ public class ApplicationEntryPoint {
 
 
         PhoneBookApplication phoneBookApplication = new PhoneBookApplicationBuilder()
-                    .withCommands(new CommandDefinition("add", addParametrDefinitionsList,commandAdd))
+                    .withCommands(new CommandDefinition("add", addParametrDefinitionsList, commandAdd))
                     .withCommands(new CommandDefinition("find", findParametrDefinitionsList, commandFind))
                     .withCommands(new CommandDefinition("list", listParametrDefinitionsList, commandList))
                     .withCommands(new CommandDefinition("help", helpParametrDefinitionsList, commandHelp))

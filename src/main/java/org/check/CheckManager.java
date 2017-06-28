@@ -7,8 +7,10 @@ import org.services.ParametrDefinitions;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.DataFormatException;
 
 /**
  * Created by Юлия on 26.06.2017.
@@ -22,11 +24,11 @@ public class CheckManager {
     }
 
     public Data returnValidateObject() throws Exception {
-        if(commandCheck.check(commandCheck.getParametrDefinitions(),commandCheck.getOptionalParams(),commandCheck.getCommandArgumentsFromCommandLine()) == true){
+        if(commandCheck.check(commandCheck.getParametrDefinitions(),commandCheck.getOptionalParams(),commandCheck.getCommandArgumentsFromCommandLine())){
             chooseMethodName(commandCheck.getCommandArgumentsFromCommandLine()[0]);
             return data;
         }else {
-            throw new RuntimeException("Error with command line parametrs. Please, use help-manager.");
+            throw new DataFormatException();
         }
     }
 
@@ -138,15 +140,15 @@ public class CheckManager {
         return m.matches();
     }
 
-    public String getName(String str) throws Exception {
+    public String getName(String str) throws DataFormatException {
         String returnName = "";
-        if (checkNameSymbol(str) == true) {
+        if (checkNameSymbol(str)) {
             for (String value : str.split("=")) {
                 returnName = value;
             }
             return returnName;
         } else {
-            throw new Exception("Incorrect name data.Please,use help-manager.");
+            throw new DataFormatException();
        }
     }
 
@@ -156,15 +158,15 @@ public class CheckManager {
         return m.matches();
     }
 
-    public String getPhone(String str) throws Exception {
-        if (checkPhoneSymbol(str) == true) {
+    public String getPhone(String str) throws DataFormatException {
+        if (checkPhoneSymbol(str)) {
             String returnPhone = "";
             for (String value : str.split("=")) {
                 returnPhone = value;
             }
             return returnPhone;
         } else {
-            throw new Exception("Incorrect phone number. Please,use help-manager.");
+            throw new DataFormatException();
         }
     }
 
@@ -174,15 +176,15 @@ public class CheckManager {
         return m.matches();
     }
 
-    public String getFileName(String str) throws Exception {
-        if (checkFileName(str) == true) {
+    public String getFileName(String str) throws DataFormatException {
+        if (checkFileName(str)) {
             String returnFileName = "";
             for (String value : str.split("=")) {
                 returnFileName = value;
             }
             return returnFileName.substring(0, returnFileName.length() - 1);
         } else {
-            throw new Exception("Incorrect file name. Please,use help-manager.");
+            throw new DataFormatException();
         }
     }
 
@@ -192,16 +194,16 @@ public class CheckManager {
         return m.matches();
     }
 
-    public String getFileDir(String str) throws Exception {
+    public String getFileDir(String str) throws DataFormatException {
 
-        if (checkFileDir(str) == true) {
+        if (checkFileDir(str)) {
             String returnFileDir = "";
             for (String value : str.split("=")) {
                 returnFileDir = value;
             }
             return returnFileDir.substring(0, returnFileDir.length() - 1);
         } else {
-            throw new Exception("Incorrect name of directory. Please,use help-manager.");
+            throw new DataFormatException();
         }
     }
 }

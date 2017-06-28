@@ -28,5 +28,4 @@ public class CommandDefinition {
         this.parametrDefinitions = parametrDefinitions;
         this.command = command;
     }
-
 }
