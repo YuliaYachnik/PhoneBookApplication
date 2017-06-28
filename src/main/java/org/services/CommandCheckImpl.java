@@ -1,7 +1,6 @@
 package org.services;
 
 import org.check.Check;
-
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +38,7 @@ public class CommandCheckImpl implements Check {
         if (parametrDefinitions == null || args == null || args.length > 5) {
             throw new NullPointerException("Parametrs are not valid! Please, use help-manager");
         } else {
-            if (checkMatchingOptionalAndArgsParametr())
-                return true;
+            if (checkMatchingDefinitionAndArgsParametr()) return true;
             return false;
         }
     }
@@ -65,7 +63,7 @@ public class CommandCheckImpl implements Check {
         else return true;
     }
 
-    public boolean checkMatchingOptionalAndArgsParametr() {
+    public boolean checkMatchingDefinitionAndArgsParametr() {
         if (generalRuleCheck() || checkHelp()) return true;
         return false;
     }

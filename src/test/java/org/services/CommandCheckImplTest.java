@@ -79,22 +79,22 @@ public class CommandCheckImplTest {
 
     @Test(expected = AssertionError.class)
     public void throwExceptionIfOptionalAndArgsParametrNotMatchInAdd(){
-        Assert.assertFalse(commandCheckForAdd.checkMatchingOptionalAndArgsParametr());
+        Assert.assertFalse(commandCheckForAdd.checkMatchingDefinitionAndArgsParametr());
     }
 
     @Test(expected = AssertionError.class)
     public void throwExceptionIfptionalAndArgsParametrNotMatchInFind(){
-        Assert.assertFalse(commandCheckForFind.checkMatchingOptionalAndArgsParametr());
+        Assert.assertFalse(commandCheckForFind.checkMatchingDefinitionAndArgsParametr());
     }
 
     @Test(expected = AssertionError.class)
     public void throwExceptionIfOptionalAndArgsParametrNotMatchInList(){
-        Assert.assertFalse(commandCheckForList.checkMatchingOptionalAndArgsParametr());
+        Assert.assertFalse(commandCheckForList.checkMatchingDefinitionAndArgsParametr());
     }
 
     @Test(expected = NullPointerException.class)
     public  void throwExceptionIfOptionalAndArgsParametrNotMatchInHelp(){
-        Assert.assertFalse(commandCheckForHelp.checkMatchingOptionalAndArgsParametr());
+        Assert.assertFalse(commandCheckForHelp.checkMatchingDefinitionAndArgsParametr());
     }
 
     @Test(expected = AssertionError.class)

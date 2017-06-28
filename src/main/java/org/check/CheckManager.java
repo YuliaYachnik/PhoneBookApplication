@@ -2,7 +2,6 @@ package org.check;
 
 import org.date.Data;
 import org.services.CommandCheckImpl;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.DataFormatException;
@@ -20,31 +19,14 @@ public class CheckManager {
 
     public Data returnValidateObject() throws Exception {
         if(commandCheck.check(commandCheck.getParametrDefinitions(),commandCheck.getOptionalParams(),commandCheck.getCommandArgumentsFromCommandLine())){
-            chooseMethodName(commandCheck.getCommandArgumentsFromCommandLine()[0]);
+            parseArguments();
             return data;
         }else {
             throw new DataFormatException();
         }
     }
 
-    public void chooseMethodName(String name) throws Exception {
-        if(name.equals("add")) addArgumentsIntoAdd();
-        if(name.equals("find")) addArgumentsIntoFind();
-        if(name.equals("list")) addArgumentsIntoList();
-        if(name.equals("help")) addArgumentsIntoHelp();
-    }
-
-    public  Data addArgumentsIntoHelp(){
-        Data data = new Data();
-        return data;
-    }
-
-    public boolean isOptionalNull(){
-        if(commandCheck.getOptionalParams() == null) return true;
-        else  return false;
-    }
-
-    public Data addArgumentsIntoAdd() throws DataFormatException{
+    public Data parseArguments() throws DataFormatException, ArrayIndexOutOfBoundsException{
         data = new Data();
         for(int i = 0; i < commandCheck.getParametrDefinitions().size(); i++){
             if(commandCheck.getParametrDefinitions().get(i).isMandatory()){
@@ -55,35 +37,6 @@ public class CheckManager {
             }else{
                if(commandCheck.getCommandArgumentsFromCommandLine().length > commandCheck.getParametrDefinitions().size())
                    OptionalInCommandLine();
-                else
-                    NotOptionalInCommandLine();
-            }
-        }
-        return data;
-    }
-
-    public Data addArgumentsIntoList()throws DataFormatException{
-        data = new Data();
-        for(int i = 0; i < commandCheck.getParametrDefinitions().size(); i++){
-            if(!commandCheck.getParametrDefinitions().get(i).isMandatory()){
-                if(commandCheck.getCommandArgumentsFromCommandLine().length > commandCheck.getParametrDefinitions().size())
-                    OptionalInCommandLine();
-                else
-                    NotOptionalInCommandLine();
-            }
-        }
-        return data;
-    }
-
-    public Data addArgumentsIntoFind() throws DataFormatException{
-        data = new Data();
-        for(int i = 0; i < commandCheck.getParametrDefinitions().size(); i++){
-            if(commandCheck.getParametrDefinitions().get(i).isMandatory()){
-                if(commandCheck.getParametrDefinitions().get(i).getName().contains("name"))
-                    data.setName(getName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
-            }else{
-                if(commandCheck.getCommandArgumentsFromCommandLine().length > commandCheck.getParametrDefinitions().size())
-                    OptionalInCommandLine();
                 else
                     NotOptionalInCommandLine();
             }
@@ -111,10 +64,6 @@ public class CheckManager {
                     data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));}
             }
         return data;
-    }
-
-    public int countArguments(String arguments[]){
-        return arguments.length;
     }
 
     public static boolean checkNameSymbol(String str) {
