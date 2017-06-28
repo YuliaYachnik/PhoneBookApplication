@@ -1,6 +1,7 @@
 package org.check;
 
-import org.date.Data;
+import org.date.PhoneBookData;
+import org.date.PrintObject;
 import org.services.CommandCheckImpl;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,29 +9,29 @@ import java.util.zip.DataFormatException;
 
 public class CheckManager {
     private CommandCheckImpl commandCheck;
-    private Data data;
+    private Class<PrintObject> objectClass;
 
     public CheckManager(CommandCheckImpl commandCheck) {
         this.commandCheck = commandCheck;
     }
 
-    public Data returnValidateObject() throws Exception {
+    public Class<PrintObject> returnValidateObject() throws Exception {
         if(commandCheck.check(commandCheck.getParametrDefinitions(),commandCheck.getOptionalParams(),commandCheck.getCommandArgumentsFromCommandLine())){
             parseArguments();
-            return data;
+            return objectClass;
         }else {
             throw new DataFormatException();
         }
     }
 
-    public Data parseArguments() throws DataFormatException, ArrayIndexOutOfBoundsException{
-        data = new Data();
+    public Class<PrintObject> parseArguments() throws DataFormatException, ArrayIndexOutOfBoundsException{
+        objectClass = new PhoneBookData();
         for(int i = 0; i < commandCheck.getParametrDefinitions().size(); i++){
             if(commandCheck.getParametrDefinitions().get(i).isMandatory()){
                 if(commandCheck.getParametrDefinitions().get(i).getName().contains("name"))
-                 data.setName(getName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
+                 objectClass.setName(getName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
                 else
-                    data.setPhone(getPhone(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
+                    objectClass.setPhone(getPhone(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
             }else{
                if(commandCheck.getCommandArgumentsFromCommandLine().length > commandCheck.getParametrDefinitions().size())
                    OptionalInCommandLine();
@@ -38,29 +39,29 @@ public class CheckManager {
                     NotOptionalInCommandLine();
             }
         }
-        return data;
+        return objectClass;
     }
 
-    public Data NotOptionalInCommandLine() throws DataFormatException{
+    public Class<PrintObject> NotOptionalInCommandLine() throws DataFormatException{
         for(int i = 0;i < commandCheck.getParametrDefinitions().size(); i++){
             if(!commandCheck.getParametrDefinitions().get(i).isMandatory()){
                 if(commandCheck.getParametrDefinitions().get(i).getName().contains("filename"))
-                    data.setFileName(commandCheck.getOptionalParams().get("--filename"));
+                    objectClass.setFileName(commandCheck.getOptionalParams().get("--filename"));
                 else
-                    data.setDirName(commandCheck.getOptionalParams().get("--dirname"));
+                    objectClass.setDirName(commandCheck.getOptionalParams().get("--dirname"));
             }
         }
-        return data;
+        return objectClass;
     }
-    public Data OptionalInCommandLine() throws DataFormatException{
+    public Class<PrintObject> OptionalInCommandLine() throws DataFormatException{
         for(int i = 0;i < commandCheck.getParametrDefinitions().size(); i++){
             if(!commandCheck.getParametrDefinitions().get(i).isMandatory()){
                 if(commandCheck.getParametrDefinitions().get(i).getName().contains("filename"))
-                    data.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
+                    objectClass.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
                 else
-                    data.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));}
+                    objectClass.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));}
             }
-        return data;
+        return objectClass;
     }
 
     public static boolean checkNameSymbol(String str) {

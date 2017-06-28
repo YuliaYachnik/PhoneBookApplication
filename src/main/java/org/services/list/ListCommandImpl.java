@@ -1,17 +1,18 @@
 package org.services.list;
 
-import org.date.Data;
+import org.date.PhoneBookData;
+import org.date.PrintObject;
 import org.fileworking.FileWorker;
 import org.services.Command;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ListCommandImpl implements Command{
-    private ArrayList<Data> personListOut = new ArrayList<Data>();
+    private ArrayList<PhoneBookData> personListOut = new ArrayList<PhoneBookData>();
 
-    public void execute(Data data) throws IOException{
-        String filename = data.getFileName();
-        String dirname = data.getDirName();
+    public void execute(Class <PrintObject> objectClass) throws IOException{
+        String filename = objectClass.getFileName();
+        String dirname = objectClass.getDirName();
         FileWorker fileWorker = new FileWorker();
         personListOut = fileWorker.readFile(filename, dirname);
         if (personListOut.size() != 0) {
@@ -19,6 +20,6 @@ public class ListCommandImpl implements Command{
                 System.out.println(personListOut.get(i));
             }
         } else
-            System.out.println("No data found! Please, use help-manager.");
+            System.out.println("No phoneBookData found! Please, use help-manager.");
     }
 }

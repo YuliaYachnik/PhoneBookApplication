@@ -1,23 +1,25 @@
 package org.fileworking;
 
-import org.date.Data;
+import org.date.PhoneBookData;
+import org.date.PrintObject;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class FileWorker {
     private String pass = "E:/";
 
-    public void writeFile(Data data) throws IOException {
-        File folder = new File(pass + data.getDirName());
+    public void writeFile(Class <PrintObject> objectClass) throws IOException {
+        File folder = new File(pass + phoneBookData.getDirName());
         if (!folder.exists()){
             folder.mkdir();
         }
-        FileOutputStream fileOutputStream = new FileOutputStream(folder + File.separator + data.getFileName(), true);
+        FileOutputStream fileOutputStream = new FileOutputStream(folder + File.separator + phoneBookData.getFileName(), true);
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, "UTF-8"));
         try {
-            bufferedWriter.append(data.getName());
+            bufferedWriter.append(phoneBookData.getName());
             bufferedWriter.append(" - ");
-            bufferedWriter.append(data.getPhone());
+            bufferedWriter.append(phoneBookData.getPhone());
             bufferedWriter.newLine();
         } finally {
                 bufferedWriter.close();
@@ -26,20 +28,20 @@ public class FileWorker {
         }
     }
 
-    public ArrayList<Data> readFile(String fileName, String dirName) throws IOException{
+    public ArrayList<PhoneBookData> readFile(String fileName, String dirName) throws IOException{
         File folder = new File(pass + dirName + File.separator + fileName);
-        Data data;
+        PhoneBookData phoneBookData;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(folder));
         try {
-            ArrayList<Data> personList = new ArrayList<Data>();
+            ArrayList<PhoneBookData> personList = new ArrayList<PhoneBookData>();
             ArrayList<String> str = new ArrayList<String>();
             if (!folder.exists()) throw new FileNotFoundException();
             String buf;
             while ((buf = bufferedReader.readLine()) != null) {
                 str = parseStringtoArray(buf);
                 if (str != null) {
-                    data = new Data(str.get(0), str.get(1), fileName, dirName);
-                    personList.add(data);
+                    phoneBookData = new PhoneBookData(str.get(0), str.get(1), fileName, dirName);
+                    personList.add(phoneBookData);
                 }
             }
             return personList;
@@ -48,19 +50,19 @@ public class FileWorker {
         }
     }
 
-    public ArrayList<Data> findInFile(Data data) throws IOException{
-        File folder = new File(pass + data.getDirName() + File.separator + data.getFileName());
+    public ArrayList<Class<PrintObject>> findInFile(Class <PrintObject> objectClass) throws IOException{
+        File folder = new File(pass + phoneBookData.getDirName() + File.separator + phoneBookData.getFileName());
         BufferedReader bufferedReader = new BufferedReader(new FileReader(folder));
         try {
-            Data finddata;
-            ArrayList<Data> personList = new ArrayList<Data>();
+            PhoneBookData finddata;
+            ArrayList<PhoneBookData> personList = new ArrayList<PhoneBookData>();
             ArrayList<String> str = new ArrayList<String>();
             if (!folder.exists()) throw new FileNotFoundException();
             String buf;
             while ((buf = bufferedReader.readLine()) != null) {
-                str = parseStringtoArrayWithFind(buf, data.getName());
+                str = parseStringtoArrayWithFind(buf, phoneBookData.getName());
                 if (str != null) {
-                    finddata = new Data(str.get(0), str.get(1), data.getFileName(), data.getDirName());
+                    finddata = new PhoneBookData(str.get(0), str.get(1), phoneBookData.getFileName(), phoneBookData.getDirName());
                     personList.add(finddata);
                 }
             }

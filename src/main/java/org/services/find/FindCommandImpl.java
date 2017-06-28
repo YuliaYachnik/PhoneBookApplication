@@ -1,22 +1,23 @@
 package org.services.find;
 
-import org.date.Data;
+import org.date.PhoneBookData;
+import org.date.PrintObject;
 import org.fileworking.FileWorker;
 import org.services.Command;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class FindCommandImpl implements Command{
-    private ArrayList<Data> personFindOut = new ArrayList<Data>();
+    private ArrayList<Class <PrintObject> > classArrayList = new ArrayList<>();
 
-    public void execute(Data data) throws IOException{
+    public void execute(Class <PrintObject> objectClass) throws IOException{
             FileWorker fileWorker = new FileWorker();
-            personFindOut = fileWorker.findInFile(data);
-            if (personFindOut.size() != 0) {
-                for (int i = 0; i < personFindOut.size(); i++) {
-                    System.out.println(personFindOut.get(i));
+            classArrayList = fileWorker.findInFile(objectClass);
+            if (classArrayList.size() != 0) {
+                for (int i = 0; i < classArrayList.size(); i++) {
+                    System.out.println(classArrayList.get(i));
                 }
-            } else System.out.println("No data found! Please, use help-manager.");
+            } else System.out.println("No phoneBookData found! Please, use help-manager.");
     }
 }
 

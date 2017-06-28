@@ -1,6 +1,7 @@
 package org.services.help;
 
-import org.date.Data;
+import org.date.PhoneBookData;
+import org.date.PrintObject;
 import org.services.Command;
 
 public class HelpCommandImpl implements Command {
@@ -41,7 +42,7 @@ public class HelpCommandImpl implements Command {
             "This help-manager give you some description and syntax of the application command:\n" +
             "help";
 
-    public void execute(Data data) {
+    public void execute(Class <PrintObject> objectClass) {
         System.out.println(messege);
         System.out.println(helpMessage);
         System.out.println(addMessage);

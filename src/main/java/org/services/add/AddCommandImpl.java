@@ -1,6 +1,7 @@
 package org.services.add;
 
-import org.date.Data;
+import org.date.PhoneBookData;
+import org.date.PrintObject;
 import org.fileworking.FileWorker;
 import org.services.Command;
 import java.io.IOException;
@@ -9,11 +10,11 @@ import java.util.List;
 
 public class AddCommandImpl implements Command {
 
-    public void execute(Data data) throws IOException{
-        List<Data> persons = new ArrayList<>();
-        persons.add(data);
+    public void execute(Class <PrintObject> objectClass) throws IOException{
+        List<Class <PrintObject>> persons = new ArrayList<>();
+        persons.add(objectClass);
         FileWorker fileWorker = new FileWorker();
-        fileWorker.writeFile(data);
+        fileWorker.writeFile(objectClass);
     }
 }
 

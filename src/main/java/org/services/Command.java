@@ -1,8 +1,10 @@
 package org.services;
 
-import org.date.Data;
+import org.date.PhoneBookData;
+import org.date.PrintObject;
+
 import java.io.IOException;
 
 public interface Command{
-    void execute(Data data) throws IOException;
+    void execute(Class <PrintObject> objectClass) throws IOException;
 }

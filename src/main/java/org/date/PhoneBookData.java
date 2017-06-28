@@ -1,19 +1,19 @@
 package org.date;
 
-public class Data {
+public class PhoneBookData implements PrintObject{
     private String name;
     private String phone;
     private String fileName;
     private String dirName;
     
-    public Data(String name, String phone, String fileName, String dirName) {
+    public PhoneBookData(String name, String phone, String fileName, String dirName) {
         this.name = name;
         this.phone = phone;
         this.fileName = fileName;
         this.dirName = dirName;
     }
 
-    public Data() {
+    public PhoneBookData() {
     }
 
     public String getName() {
@@ -49,7 +49,7 @@ public class Data {
     }
 
     @Override
-    public String toString() {
+    public String print() {
         return "Name ='" + name + '\'' +
                 ", Phone number ='" + phone + '\'' +
                 ", File Name ='" + fileName + '\'' +

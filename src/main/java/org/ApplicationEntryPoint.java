@@ -1,6 +1,5 @@
 package org;
 
-import org.services.Command;
 import org.services.CommandDefinition;
 import org.services.ParametrDefinitions;
 import org.services.add.AddCommandImpl;
@@ -11,9 +10,6 @@ import org.services.list.ListCommandImpl;
 import java.lang.reflect.Array;
 import java.util.*;
 
-/**
- * Created by Юлия on 19.06.2017.
- */
 public class ApplicationEntryPoint {
     public static void main(String args[]) throws ClassNotFoundException {
 
