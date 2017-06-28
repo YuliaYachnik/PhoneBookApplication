@@ -38,8 +38,7 @@ public class CommandCheckImpl implements Check {
         if (parametrDefinitions == null || args == null || args.length > 5) {
             throw new NullPointerException("Parametrs are not valid! Please, use help-manager");
         } else {
-            if (checkMatchingDefinitionAndArgsParametr()) return true;
-            return false;
+            return checkMatchingDefinitionAndArgsParametr();
         }
     }
 
@@ -52,19 +51,14 @@ public class CommandCheckImpl implements Check {
     }
 
     public boolean checkHelp() {
-        if (getCommandArgumentsFromCommandLine().length == 1 && getCommandArgumentsFromCommandLine().length >= getParametrDefinitions().size())
-            return true;
-        else return false;
+        return getCommandArgumentsFromCommandLine().length == 1 && getCommandArgumentsFromCommandLine().length >= getParametrDefinitions().size();
     }
 
     public boolean generalRuleCheck() {
-        if (getCommandArgumentsFromCommandLine().length < getMandatoryArguments() + 1 || getCommandArgumentsFromCommandLine().length > getParametrDefinitions().size() + 1)
-            return false;
-        else return true;
+        return !(getCommandArgumentsFromCommandLine().length < getMandatoryArguments() + 1 || getCommandArgumentsFromCommandLine().length > getParametrDefinitions().size() + 1);
     }
 
     public boolean checkMatchingDefinitionAndArgsParametr() {
-        if (generalRuleCheck() || checkHelp()) return true;
-        return false;
+        return generalRuleCheck() || checkHelp();
     }
 }

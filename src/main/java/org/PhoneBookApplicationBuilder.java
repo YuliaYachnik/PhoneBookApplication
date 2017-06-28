@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by Юлия on 19.06.2017.
  */
 public class PhoneBookApplicationBuilder {
-    private List<CommandDefinition> commandDefinition =  new ArrayList<CommandDefinition>();;
+    private List<CommandDefinition> commandDefinition =  new ArrayList<CommandDefinition>();
     private Map<String,String> params;
 
     public PhoneBookApplication build(){
