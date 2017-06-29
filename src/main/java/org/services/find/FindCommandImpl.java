@@ -1,16 +1,15 @@
 package org.services.find;
 
-import org.date.PhoneBookData;
-import org.date.PrintObject;
+import org.date.SetGetObject;
 import org.fileworking.FileWorker;
 import org.services.Command;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class FindCommandImpl implements Command{
-    private ArrayList<Class <PrintObject> > classArrayList = new ArrayList<>();
+    private ArrayList<SetGetObject > classArrayList = new ArrayList<>();
 
-    public void execute(Class <PrintObject> objectClass) throws IOException{
+    public void execute(SetGetObject objectClass) throws IOException{
             FileWorker fileWorker = new FileWorker();
             classArrayList = fileWorker.findInFile(objectClass);
             if (classArrayList.size() != 0) {

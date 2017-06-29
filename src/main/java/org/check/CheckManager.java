@@ -1,67 +1,83 @@
 package org.check;
 
-import org.date.PhoneBookData;
-import org.date.PrintObject;
+import org.date.SetGetObject;
 import org.services.CommandCheckImpl;
+import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.DataFormatException;
 
 public class CheckManager {
     private CommandCheckImpl commandCheck;
-    private Class<PrintObject> objectClass;
+    private SetGetObject setGetObject;
 
-    public CheckManager(CommandCheckImpl commandCheck) {
+    public CheckManager(CommandCheckImpl commandCheck, SetGetObject setGetObject) {
         this.commandCheck = commandCheck;
+        this.setGetObject = setGetObject;
     }
 
-    public Class<PrintObject> returnValidateObject() throws Exception {
+    public SetGetObject returnValidateObject() throws Exception {
         if(commandCheck.check(commandCheck.getParametrDefinitions(),commandCheck.getOptionalParams(),commandCheck.getCommandArgumentsFromCommandLine())){
             parseArguments();
-            return objectClass;
+            return setGetObject;
         }else {
             throw new DataFormatException();
         }
     }
 
-    public Class<PrintObject> parseArguments() throws DataFormatException, ArrayIndexOutOfBoundsException{
-        objectClass = new PhoneBookData();
-        for(int i = 0; i < commandCheck.getParametrDefinitions().size(); i++){
+    public SetGetObject parseArguments() throws DataFormatException, ArrayIndexOutOfBoundsException,
+            InstantiationException, IllegalAccessException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException {
+        String name = null;
+        String phone = null;
+        String file, dir;
+        String filedir[] = new String[2];
+       for(int i = 0; i < commandCheck.getParametrDefinitions().size(); i++){
             if(commandCheck.getParametrDefinitions().get(i).isMandatory()){
-                if(commandCheck.getParametrDefinitions().get(i).getName().contains("name"))
-                 objectClass.setName(getName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
-                else
-                    objectClass.setPhone(getPhone(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
+                if(commandCheck.getParametrDefinitions().get(i).getName().contains("name")){
+                    name = (getName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
+                } else
+                   phone = (getPhone(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
             }else{
-               if(commandCheck.getCommandArgumentsFromCommandLine().length > commandCheck.getParametrDefinitions().size())
-                   OptionalInCommandLine();
-                else
-                    NotOptionalInCommandLine();
+               if(commandCheck.getCommandArgumentsFromCommandLine().length > commandCheck.getParametrDefinitions().size()){
+                   filedir  = OptionalInCommandLine();
+                   file = filedir[0]; dir = filedir[1];
+                   setGetObject.setParams(name,phone,file,dir);
+                   return setGetObject;
+
+               } else{
+                   filedir  =  NotOptionalInCommandLine();
+                   file = filedir[0]; dir = filedir[1];
+                   setGetObject.setParams(name,phone,file,dir);
+                   return setGetObject;
+               }
+
             }
         }
-        return objectClass;
+        return setGetObject;
     }
 
-    public Class<PrintObject> NotOptionalInCommandLine() throws DataFormatException{
+    public String[] NotOptionalInCommandLine() throws DataFormatException{
+        String filedir[] = new String[2];
         for(int i = 0;i < commandCheck.getParametrDefinitions().size(); i++){
             if(!commandCheck.getParametrDefinitions().get(i).isMandatory()){
                 if(commandCheck.getParametrDefinitions().get(i).getName().contains("filename"))
-                    objectClass.setFileName(commandCheck.getOptionalParams().get("--filename"));
+                   filedir[0] = (commandCheck.getOptionalParams().get("--filename"));
                 else
-                    objectClass.setDirName(commandCheck.getOptionalParams().get("--dirname"));
+                    filedir[1]  = (commandCheck.getOptionalParams().get("--dirname"));
             }
         }
-        return objectClass;
+        return filedir;
     }
-    public Class<PrintObject> OptionalInCommandLine() throws DataFormatException{
+    public String[] OptionalInCommandLine() throws DataFormatException{
+        String filedir[] = new String[2];
         for(int i = 0;i < commandCheck.getParametrDefinitions().size(); i++){
             if(!commandCheck.getParametrDefinitions().get(i).isMandatory()){
                 if(commandCheck.getParametrDefinitions().get(i).getName().contains("filename"))
-                    objectClass.setFileName(getFileName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
+                    filedir[0] =  (getFileName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
                 else
-                    objectClass.setDirName(getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));}
+                    filedir[1] = (getFileDir(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));}
             }
-        return objectClass;
+        return filedir;
     }
 
     public static boolean checkNameSymbol(String str) {

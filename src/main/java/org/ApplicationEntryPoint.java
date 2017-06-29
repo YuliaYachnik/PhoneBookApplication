@@ -1,5 +1,6 @@
 package org;
 
+import org.date.SetGetObject;
 import org.services.CommandDefinition;
 import org.services.ParametrDefinitions;
 import org.services.add.AddCommandImpl;
@@ -7,13 +8,17 @@ import org.services.find.FindCommandImpl;
 import org.services.help.HelpCommandImpl;
 import org.services.list.ListCommandImpl;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class ApplicationEntryPoint {
-    public static void main(String args[]) throws ClassNotFoundException {
+    public static void main(String args[]) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
 
         Class command;
+        Class objectClassPhoneBook = Class.forName("org.date.PhoneBookData");
+        SetGetObject setGetObject = (SetGetObject)objectClassPhoneBook.newInstance();
+
+       /* Class objectClassLibrary = Class.forName("org.date.LibraryData");
+        SetGetObject printLibraryObject = (SetGetObject)objectClassLibrary.newInstance();*/
 
         ParametrDefinitions nameParametrDefinitions = new ParametrDefinitions("name",true);
         ParametrDefinitions phoneParametrDefinitions = new ParametrDefinitions("phone",true);
@@ -29,7 +34,12 @@ public class ApplicationEntryPoint {
         matchOptionalParametrsWithDefaultValue.put("--filename","phonebook.txt");
         matchOptionalParametrsWithDefaultValue.put("--dirname","phonebook");
 
+
         PhoneBookApplication phoneBookApplication = new PhoneBookApplicationBuilder()
+                    .forData(setGetObject)
+                   // .forData(printLibraryObject)
+                    //.forData(setGetObject = new LibraryData().getClass())
+                    //.forData(setGetObject = new HotelBookData().getClass())
                     .withCommands(new CommandDefinition("add", addParametrDefinitionsList,command = new AddCommandImpl().getClass()))
                     .withCommands(new CommandDefinition("find", findParametrDefinitionsList, command = new FindCommandImpl().getClass()))
                     .withCommands(new CommandDefinition("list", listParametrDefinitionsList,command = new ListCommandImpl().getClass()))

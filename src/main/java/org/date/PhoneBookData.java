@@ -1,58 +1,54 @@
 package org.date;
 
-public class PhoneBookData implements PrintObject{
+public class PhoneBookData implements SetGetObject {
     private String name;
     private String phone;
-    private String fileName;
-    private String dirName;
+    private String file;
+    private String dir;
     
-    public PhoneBookData(String name, String phone, String fileName, String dirName) {
+    public PhoneBookData(String name, String phone, String file, String dir) {
         this.name = name;
         this.phone = phone;
-        this.fileName = fileName;
-        this.dirName = dirName;
+        this.file = file;
+        this.dir = dir;
     }
 
     public PhoneBookData() {
     }
 
+    @Override
+    public String toString() {
+        return "Name ='" + name + '\'' +
+                ", Phone number ='" + phone + '\'' +
+                ", File Name ='" + file + '\'' +
+                ", Name of Directory ='" + dir + '\'';
+    }
+
+    @Override
+    public void setParams(String name, String phone, String file, String dir) {
+        this.name = name;
+        this.phone = phone;
+        this.file = file;
+        this.dir = dir;
+    }
+
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public String getPhone() {
         return phone;
     }
 
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getDirName() {
-        return dirName;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public void setDirName(String dirName) {
-        this.dirName = dirName;
+    @Override
+    public String getFile() {
+        return file;
     }
 
     @Override
-    public String print() {
-        return "Name ='" + name + '\'' +
-                ", Phone number ='" + phone + '\'' +
-                ", File Name ='" + fileName + '\'' +
-                ", Name of Directory='" + dirName + '\'';
+    public String getDir() {
+        return dir;
     }
 }

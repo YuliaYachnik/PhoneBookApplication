@@ -1,6 +1,7 @@
 package org;
 
 import org.check.CheckManager;
+import org.date.SetGetObject;
 import org.services.*;
 
 import java.io.FileNotFoundException;
@@ -14,22 +15,25 @@ public class PhoneBookApplication {
     private List <CommandDefinition> commandDefinition;
     private Map<String,String> params;
     private Map <String,CommandDefinition> commandDefinitionMap;
+    private SetGetObject objectClass;
 
-    public PhoneBookApplication(List <CommandDefinition> commandDefinition, Map<String, String> params) {
+    public PhoneBookApplication(List <CommandDefinition> commandDefinition, Map<String, String> params,SetGetObject objectClass) {
             this.commandDefinition = commandDefinition;
             this.params = params;
             commandDefinitionMap = new HashMap<>();
             for(int i = 0; i < commandDefinition.size(); i++) {
                 commandDefinitionMap.put(commandDefinition.get(i).getName(), commandDefinition.get(i));
             }
+            this.objectClass = objectClass;
     }
 
     public void run(String args[]){
         try{
             String commandName = args[0];
+           // SetGetObject printObject = objectClass.newInstance();
             Command  command = commandDefinitionMap.get(commandName).getCommand().newInstance();
             CommandCheckImpl commandCheck = new CommandCheckImpl(this.commandDefinitionMap.get(commandName).getParametrDefinitions(),params,args);
-            CheckManager checkManager = new CheckManager(commandCheck);
+            CheckManager checkManager = new CheckManager(commandCheck,objectClass);
             command.execute(checkManager.returnValidateObject());
         }catch (NullPointerException e){
             System.out.println("Such method no definite");

@@ -1,16 +1,14 @@
 package org.date;
 
-public class LibraryData implements PrintObject{
-    private String bookName;
+public class LibraryData{
+    private String name;
     private String authorSurName;
-    private String edition; //тираж
     private String filename;
     private String dirname;
 
-    public LibraryData(String bookName, String authorSurName, String edition, String filename, String dirname) {
-        this.bookName = bookName;
+    public LibraryData(String name, String authorSurName, String filename, String dirname) {
+        this.name = name;
         this.authorSurName = authorSurName;
-        this.edition = edition;
         this.filename = filename;
         this.dirname = dirname;
     }
@@ -19,15 +17,11 @@ public class LibraryData implements PrintObject{
     }
 
     public String getBookName() {
-        return bookName;
+        return name;
     }
 
     public String getAuthorSurName() {
         return authorSurName;
-    }
-
-    public String getEdition() {
-        return edition;
     }
 
     public String getFilename() {
@@ -38,16 +32,12 @@ public class LibraryData implements PrintObject{
         return dirname;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public void setBookName(String name) {
+        this.name = name;
     }
 
     public void setAuthorSurName(String authorSurName) {
         this.authorSurName = authorSurName;
-    }
-
-    public void setEdition(String edition) {
-        this.edition = edition;
     }
 
     public void setFilename(String filename) {
@@ -58,11 +48,10 @@ public class LibraryData implements PrintObject{
         this.dirname = dirname;
     }
 
-    @Override
+
     public String print() {
-        return "Book name ='" + bookName + '\'' +
+        return "Book name ='Library" + name + '\'' +
                 ",Author Surname ='" + authorSurName + '\'' +
-                ", Number of edition ='" + edition + '\'' +
                 ", File name ='" + filename + '\'' +
                 ", Name of directory ='" + dirname;
     }

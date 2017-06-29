@@ -1,10 +1,10 @@
 package org.services;
 
-import org.date.PhoneBookData;
-import org.date.PrintObject;
+import org.date.SetGetObject;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 public interface Command{
-    void execute(Class <PrintObject> objectClass) throws IOException;
+    void execute(SetGetObject objectClass) throws IOException, IllegalAccessException, InstantiationException, InvocationTargetException;
 }

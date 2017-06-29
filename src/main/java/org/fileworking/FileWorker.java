@@ -1,7 +1,7 @@
 package org.fileworking;
 
 import org.date.PhoneBookData;
-import org.date.PrintObject;
+import org.date.SetGetObject;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,17 +9,17 @@ import java.util.ArrayList;
 public class FileWorker {
     private String pass = "E:/";
 
-    public void writeFile(Class <PrintObject> objectClass) throws IOException {
-        File folder = new File(pass + phoneBookData.getDirName());
+    public void writeFile(SetGetObject objectClass) throws IOException {
+       File folder = new File(pass + objectClass.getDir());
         if (!folder.exists()){
             folder.mkdir();
         }
-        FileOutputStream fileOutputStream = new FileOutputStream(folder + File.separator + phoneBookData.getFileName(), true);
+        FileOutputStream fileOutputStream = new FileOutputStream(folder + File.separator + objectClass.getFile(), true);
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, "UTF-8"));
         try {
-            bufferedWriter.append(phoneBookData.getName());
+            bufferedWriter.append(objectClass.getName());
             bufferedWriter.append(" - ");
-            bufferedWriter.append(phoneBookData.getPhone());
+            bufferedWriter.append(objectClass.getPhone());
             bufferedWriter.newLine();
         } finally {
                 bufferedWriter.close();
@@ -28,20 +28,19 @@ public class FileWorker {
         }
     }
 
-    public ArrayList<PhoneBookData> readFile(String fileName, String dirName) throws IOException{
-        File folder = new File(pass + dirName + File.separator + fileName);
-        PhoneBookData phoneBookData;
+    public ArrayList<SetGetObject> readFile(SetGetObject objectClass) throws IOException{
+        File folder = new File(pass + objectClass.getDir() + File.separator + objectClass.getFile());
         BufferedReader bufferedReader = new BufferedReader(new FileReader(folder));
         try {
-            ArrayList<PhoneBookData> personList = new ArrayList<PhoneBookData>();
+            ArrayList<SetGetObject> personList = new ArrayList<SetGetObject>();
             ArrayList<String> str = new ArrayList<String>();
             if (!folder.exists()) throw new FileNotFoundException();
             String buf;
             while ((buf = bufferedReader.readLine()) != null) {
                 str = parseStringtoArray(buf);
                 if (str != null) {
-                    phoneBookData = new PhoneBookData(str.get(0), str.get(1), fileName, dirName);
-                    personList.add(phoneBookData);
+                    objectClass.setParams(str.get(0), str.get(1), objectClass.getFile(), objectClass.getDir());
+                    personList.add(objectClass);
                 }
             }
             return personList;
@@ -50,20 +49,19 @@ public class FileWorker {
         }
     }
 
-    public ArrayList<Class<PrintObject>> findInFile(Class <PrintObject> objectClass) throws IOException{
-        File folder = new File(pass + phoneBookData.getDirName() + File.separator + phoneBookData.getFileName());
+   public ArrayList<SetGetObject> findInFile(SetGetObject objectClass) throws IOException{
+        File folder = new File(pass + objectClass.getDir() + File.separator + objectClass.getFile());
         BufferedReader bufferedReader = new BufferedReader(new FileReader(folder));
         try {
-            PhoneBookData finddata;
-            ArrayList<PhoneBookData> personList = new ArrayList<PhoneBookData>();
+            ArrayList<SetGetObject> personList = new ArrayList<SetGetObject>();
             ArrayList<String> str = new ArrayList<String>();
             if (!folder.exists()) throw new FileNotFoundException();
             String buf;
             while ((buf = bufferedReader.readLine()) != null) {
-                str = parseStringtoArrayWithFind(buf, phoneBookData.getName());
+                str = parseStringtoArrayWithFind(buf, objectClass.getName());
                 if (str != null) {
-                    finddata = new PhoneBookData(str.get(0), str.get(1), phoneBookData.getFileName(), phoneBookData.getDirName());
-                    personList.add(finddata);
+                    objectClass.setParams(str.get(0), str.get(1), objectClass.getFile(), objectClass.getDir());
+                    personList.add(objectClass);
                 }
             }
             return personList;

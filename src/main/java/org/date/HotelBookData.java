@@ -1,18 +1,14 @@
 package org.date;
 
 
-public class HotelBookData implements PrintObject {
+public class HotelBookData {
     private String name;
-    private String Surname;
-    private String Passport;
     private String hotelName;
     private String fileName;
     private String dirName;
 
-    public HotelBookData(String name, String surname, String passport, String hotelName, String fileName, String dirName) {
+    public HotelBookData(String name,String hotelName, String fileName, String dirName) {
         this.name = name;
-        Surname = surname;
-        Passport = passport;
         this.hotelName = hotelName;
         this.fileName = fileName;
         this.dirName = dirName;
@@ -27,22 +23,6 @@ public class HotelBookData implements PrintObject {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSurname() {
-        return Surname;
-    }
-
-    public void setSurname(String surname) {
-        Surname = surname;
-    }
-
-    public String getPassport() {
-        return Passport;
-    }
-
-    public void setPassport(String passport) {
-        Passport = passport;
     }
 
     public String getHotelName() {
@@ -69,11 +49,9 @@ public class HotelBookData implements PrintObject {
         this.dirName = dirName;
     }
 
-    @Override
+
     public String print() {
-        return "Name ='" + name + '\'' +
-                ", Surname ='" + Surname + '\'' +
-                ", Passport ='" + Passport + '\'' +
+        return "Name ='Hotel" + name + '\'' +
                 ", Hotel name ='" + hotelName + '\'' +
                 ", File name ='" + fileName + '\'' +
                 ", Name of directory ='" + dirName;

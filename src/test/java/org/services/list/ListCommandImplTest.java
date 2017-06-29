@@ -9,9 +9,9 @@ public class ListCommandImplTest {
     PhoneBookData phoneBookData = new PhoneBookData("Nick","234135","NickPhone.txt","Phone");
     ListCommandImpl listCommand = new ListCommandImpl();
 
-    @Test
+    /*@Test
     public void checkLReadFromFile() throws IOException{
         listCommand.execute(phoneBookData);
     }
-
+*/
 }

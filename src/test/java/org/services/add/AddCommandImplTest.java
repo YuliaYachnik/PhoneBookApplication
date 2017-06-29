@@ -10,8 +10,8 @@ public class AddCommandImplTest {
     AddCommandImpl addCommand = new AddCommandImpl();
     PhoneBookData phoneBookData = new PhoneBookData("Nick","234135","NickPhone.txt","Phone");
 
-    @Test
+   /* @Test
     public void checkWriteInFile()throws IOException{
         addCommand.execute(phoneBookData);
-    }
+    }*/
 }
