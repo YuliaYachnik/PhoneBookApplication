@@ -15,10 +15,13 @@ public class ApplicationEntryPoint {
 
         Class command;
         Class objectClassPhoneBook = Class.forName("org.date.PhoneBookData");
-        SetGetObject setGetObject = (SetGetObject)objectClassPhoneBook.newInstance();
+        SetGetObject bookObject  = (SetGetObject)objectClassPhoneBook.newInstance();
 
-       /* Class objectClassLibrary = Class.forName("org.date.LibraryData");
-        SetGetObject printLibraryObject = (SetGetObject)objectClassLibrary.newInstance();*/
+        Class objectClassLibrary = Class.forName("org.date.LibraryData");
+        SetGetObject printLibraryObject = (SetGetObject)objectClassLibrary.newInstance();
+
+        Class objectClassHotel = Class.forName("org.date.HotelBookData");
+        SetGetObject printHotelObject = (SetGetObject)objectClassLibrary.newInstance();
 
         ParametrDefinitions nameParametrDefinitions = new ParametrDefinitions("name",true);
         ParametrDefinitions phoneParametrDefinitions = new ParametrDefinitions("phone",true);
@@ -36,8 +39,8 @@ public class ApplicationEntryPoint {
 
 
         PhoneBookApplication phoneBookApplication = new PhoneBookApplicationBuilder()
-                    .forData(setGetObject)
-                   // .forData(printLibraryObject)
+                    //.forData(bookObject)
+                   .forData(printLibraryObject)
                     //.forData(setGetObject = new LibraryData().getClass())
                     //.forData(setGetObject = new HotelBookData().getClass())
                     .withCommands(new CommandDefinition("add", addParametrDefinitionsList,command = new AddCommandImpl().getClass()))

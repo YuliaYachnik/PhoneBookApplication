@@ -1,7 +1,7 @@
 package org.date;
 
 
-public class HotelBookData {
+public class HotelBookData implements SetGetObject  {
     private String name;
     private String hotelName;
     private String fileName;
@@ -14,46 +14,40 @@ public class HotelBookData {
         this.dirName = dirName;
     }
 
-    public HotelBookData() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getHotelName() {
-        return hotelName;
-    }
-
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getDirName() {
-        return dirName;
-    }
-
-    public void setDirName(String dirName) {
-        this.dirName = dirName;
-    }
-
+    public HotelBookData(){}
 
     public String print() {
         return "Name ='Hotel" + name + '\'' +
                 ", Hotel name ='" + hotelName + '\'' +
                 ", File name ='" + fileName + '\'' +
                 ", Name of directory ='" + dirName;
+    }
+
+    @Override
+    public void setParams(String str1, String str2, String str3, String str4) {
+        this.name = str1;
+        this.hotelName = str2;
+        this.fileName = str3;
+        this.dirName = str4;
+    }
+
+    @Override
+    public String getField1() {
+        return name;
+    }
+
+    @Override
+    public String getField2() {
+        return hotelName;
+    }
+
+    @Override
+    public String getField3() {
+        return fileName;
+    }
+
+    @Override
+    public String getField4() {
+        return dirName;
     }
 }

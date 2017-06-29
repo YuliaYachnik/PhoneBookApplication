@@ -1,6 +1,6 @@
 package org.date;
 
-public class LibraryData{
+public class LibraryData implements SetGetObject{
     private String name;
     private String authorSurName;
     private String filename;
@@ -13,46 +13,42 @@ public class LibraryData{
         this.dirname = dirname;
     }
 
-    public LibraryData() {
+    public LibraryData(){}
+
+    @Override
+    public String toString() {
+        return "Book name ='" + name + '\'' +
+                ", Author Surname ='" + authorSurName + '\'' +
+                ", File name ='" + filename + '\'' +
+                ", Name of directory ='" + dirname + '\'' +
+                '}';
     }
 
-    public String getBookName() {
+    @Override
+    public void setParams(String str1, String str2, String str3, String str4) {
+        this.name = str1;
+        this.authorSurName = str2;
+        this.filename = str3;
+        this.dirname = str4;
+    }
+
+    @Override
+    public String getField1() {
         return name;
     }
 
-    public String getAuthorSurName() {
+    @Override
+    public String getField2() {
         return authorSurName;
     }
 
-    public String getFilename() {
+    @Override
+    public String getField3() {
         return filename;
     }
 
-    public String getDirname() {
+    @Override
+    public String getField4() {
         return dirname;
-    }
-
-    public void setBookName(String name) {
-        this.name = name;
-    }
-
-    public void setAuthorSurName(String authorSurName) {
-        this.authorSurName = authorSurName;
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
-
-    public void setDirname(String dirname) {
-        this.dirname = dirname;
-    }
-
-
-    public String print() {
-        return "Book name ='Library" + name + '\'' +
-                ",Author Surname ='" + authorSurName + '\'' +
-                ", File name ='" + filename + '\'' +
-                ", Name of directory ='" + dirname;
     }
 }

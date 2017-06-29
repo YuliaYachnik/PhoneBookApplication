@@ -1,6 +1,5 @@
 package org.fileworking;
 
-import org.date.PhoneBookData;
 import org.date.SetGetObject;
 
 import java.io.*;
@@ -10,16 +9,16 @@ public class FileWorker {
     private String pass = "E:/";
 
     public void writeFile(SetGetObject objectClass) throws IOException {
-       File folder = new File(pass + objectClass.getDir());
+       File folder = new File(pass + objectClass.getField4());
         if (!folder.exists()){
             folder.mkdir();
         }
-        FileOutputStream fileOutputStream = new FileOutputStream(folder + File.separator + objectClass.getFile(), true);
+        FileOutputStream fileOutputStream = new FileOutputStream(folder + File.separator + objectClass.getField3(), true);
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, "UTF-8"));
         try {
-            bufferedWriter.append(objectClass.getName());
+            bufferedWriter.append(objectClass.getField1());
             bufferedWriter.append(" - ");
-            bufferedWriter.append(objectClass.getPhone());
+            bufferedWriter.append(objectClass.getField2());
             bufferedWriter.newLine();
         } finally {
                 bufferedWriter.close();
@@ -29,7 +28,7 @@ public class FileWorker {
     }
 
     public ArrayList<SetGetObject> readFile(SetGetObject objectClass) throws IOException{
-        File folder = new File(pass + objectClass.getDir() + File.separator + objectClass.getFile());
+        File folder = new File(pass + objectClass.getField4() + File.separator + objectClass.getField3());
         BufferedReader bufferedReader = new BufferedReader(new FileReader(folder));
         try {
             ArrayList<SetGetObject> personList = new ArrayList<SetGetObject>();
@@ -39,7 +38,7 @@ public class FileWorker {
             while ((buf = bufferedReader.readLine()) != null) {
                 str = parseStringtoArray(buf);
                 if (str != null) {
-                    objectClass.setParams(str.get(0), str.get(1), objectClass.getFile(), objectClass.getDir());
+                    objectClass.setParams(str.get(0), str.get(1), objectClass.getField3(), objectClass.getField4());
                     personList.add(objectClass);
                 }
             }
@@ -50,7 +49,7 @@ public class FileWorker {
     }
 
    public ArrayList<SetGetObject> findInFile(SetGetObject objectClass) throws IOException{
-        File folder = new File(pass + objectClass.getDir() + File.separator + objectClass.getFile());
+        File folder = new File(pass + objectClass.getField4() + File.separator + objectClass.getField3());
         BufferedReader bufferedReader = new BufferedReader(new FileReader(folder));
         try {
             ArrayList<SetGetObject> personList = new ArrayList<SetGetObject>();
@@ -58,9 +57,9 @@ public class FileWorker {
             if (!folder.exists()) throw new FileNotFoundException();
             String buf;
             while ((buf = bufferedReader.readLine()) != null) {
-                str = parseStringtoArrayWithFind(buf, objectClass.getName());
+                str = parseStringtoArrayWithFind(buf, objectClass.getField1());
                 if (str != null) {
-                    objectClass.setParams(str.get(0), str.get(1), objectClass.getFile(), objectClass.getDir());
+                    objectClass.setParams(str.get(0), str.get(1), objectClass.getField3(), objectClass.getField4());
                     personList.add(objectClass);
                 }
             }

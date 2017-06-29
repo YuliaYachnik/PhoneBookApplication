@@ -13,9 +13,7 @@ public class PhoneBookData implements SetGetObject {
         this.dir = dir;
     }
 
-    public PhoneBookData() {
-    }
-
+    public PhoneBookData(){}
     @Override
     public String toString() {
         return "Name ='" + name + '\'' +
@@ -33,22 +31,22 @@ public class PhoneBookData implements SetGetObject {
     }
 
     @Override
-    public String getName() {
+    public String getField1() {
         return name;
     }
 
     @Override
-    public String getPhone() {
+    public String getField2() {
         return phone;
     }
 
     @Override
-    public String getFile() {
+    public String getField3() {
         return file;
     }
 
     @Override
-    public String getDir() {
+    public String getField4() {
         return dir;
     }
 }
