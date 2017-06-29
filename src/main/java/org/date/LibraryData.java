@@ -20,8 +20,7 @@ public class LibraryData implements SetGetObject{
         return "Book name ='" + name + '\'' +
                 ", Author Surname ='" + authorSurName + '\'' +
                 ", File name ='" + filename + '\'' +
-                ", Name of directory ='" + dirname + '\'' +
-                '}';
+                ", Name of directory ='" + dirname;
     }
 
     @Override

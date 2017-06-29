@@ -30,7 +30,6 @@ public class PhoneBookApplication {
     public void run(String args[]){
         try{
             String commandName = args[0];
-           // SetGetObject printObject = objectClass.newInstance();
             Command  command = commandDefinitionMap.get(commandName).getCommand().newInstance();
             CommandCheckImpl commandCheck = new CommandCheckImpl(this.commandDefinitionMap.get(commandName).getParametrDefinitions(),params,args);
             CheckManager checkManager = new CheckManager(commandCheck,objectClass);

@@ -11,6 +11,8 @@ public class PhoneBookApplicationBuilder {
     private Map<String,String> params;
     private SetGetObject objectClass;
 
+
+
     public PhoneBookApplication build(){
         return new PhoneBookApplication(commandDefinition,params,objectClass);
     }

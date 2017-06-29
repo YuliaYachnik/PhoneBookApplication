@@ -30,7 +30,7 @@ public class CheckManager {
         String name = null;
         String phone = null;
         String file, dir;
-        String filedir[] = new String[2];
+        String filedir[];
        for(int i = 0; i < commandCheck.getParametrDefinitions().size(); i++){
             if(commandCheck.getParametrDefinitions().get(i).isMandatory()){
                 if(commandCheck.getParametrDefinitions().get(i).getName().contains("name")){
@@ -50,7 +50,6 @@ public class CheckManager {
                    setGetObject.setParams(name,phone,file,dir);
                    return setGetObject;
                }
-
             }
         }
         return setGetObject;

@@ -38,9 +38,10 @@ public class ApplicationEntryPoint {
         matchOptionalParametrsWithDefaultValue.put("--dirname","phonebook");
 
 
+
         PhoneBookApplication phoneBookApplication = new PhoneBookApplicationBuilder()
-                    //.forData(bookObject)
-                   .forData(printLibraryObject)
+                    .forData(bookObject)
+                   //.forData(printLibraryObject)
                     //.forData(setGetObject = new LibraryData().getClass())
                     //.forData(setGetObject = new HotelBookData().getClass())
                     .withCommands(new CommandDefinition("add", addParametrDefinitionsList,command = new AddCommandImpl().getClass()))
