@@ -80,7 +80,7 @@ public class CheckManager {
     }
 
     public static boolean checkNameSymbol(String str) {
-        Pattern p = Pattern.compile("^--name=+[a-zA-ZА-Яа-я]{3,15}$");
+        Pattern p = Pattern.compile("^--[a-zA-ZА-Яа-я]{3,15}=[a-zA-ZА-Яа-я]{3,15}$");
         Matcher m = p.matcher(str);
         return m.matches();
     }
@@ -98,7 +98,7 @@ public class CheckManager {
     }
 
     public static boolean checkPhoneSymbol(String str) {
-        Pattern p = Pattern.compile("^--phone=+[0-9]{3,20}$");
+        Pattern p = Pattern.compile("^--[a-zA-ZА-Яа-я]{3,15}=[0-9]{3,20}$");
         Matcher m = p.matcher(str);
         return m.matches();
     }

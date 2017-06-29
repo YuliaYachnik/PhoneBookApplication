@@ -1,6 +1,5 @@
 package org.services.list;
 
-import org.date.PhoneBookData;
 import org.date.SetGetObject;
 import org.fileworking.FileWorker;
 import org.services.Command;
