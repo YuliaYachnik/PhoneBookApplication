@@ -1,6 +1,6 @@
 package org.check;
 
-import org.date.SetGetObject;
+import org.date.DataObjectWorking;
 import org.services.CommandCheckImpl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Matcher;
@@ -9,23 +9,23 @@ import java.util.zip.DataFormatException;
 
 public class CheckManager {
     private CommandCheckImpl commandCheck;
-    private SetGetObject setGetObject;
+    private DataObjectWorking dataObjectWorking;
 
-    public CheckManager(CommandCheckImpl commandCheck, SetGetObject setGetObject) {
+    public CheckManager(CommandCheckImpl commandCheck, DataObjectWorking dataObjectWorking) {
         this.commandCheck = commandCheck;
-        this.setGetObject = setGetObject;
+        this.dataObjectWorking = dataObjectWorking;
     }
 
-    public SetGetObject returnValidateObject() throws Exception {
+    public DataObjectWorking returnValidateObject() throws Exception {
         if(commandCheck.check(commandCheck.getParametrDefinitions(),commandCheck.getOptionalParams(),commandCheck.getCommandArgumentsFromCommandLine())){
             parseArguments();
-            return setGetObject;
+            return dataObjectWorking;
         }else {
             throw new DataFormatException();
         }
     }
 
-    public SetGetObject parseArguments() throws DataFormatException, ArrayIndexOutOfBoundsException,
+    public DataObjectWorking parseArguments() throws DataFormatException, ArrayIndexOutOfBoundsException,
             InstantiationException, IllegalAccessException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException {
         String name = null;
         String phone = null;
@@ -33,7 +33,7 @@ public class CheckManager {
         String filedir[];
        for(int i = 0; i < commandCheck.getParametrDefinitions().size(); i++){
             if(commandCheck.getParametrDefinitions().get(i).isMandatory()){
-                if(commandCheck.getParametrDefinitions().get(i).getName().contains("name")){
+                if(commandCheck.getParametrDefinitions().get(i).getName().contains("param1")){
                     name = (getName(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
                 } else
                    phone = (getPhone(commandCheck.getCommandArgumentsFromCommandLine()[i+1]));
@@ -41,18 +41,18 @@ public class CheckManager {
                if(commandCheck.getCommandArgumentsFromCommandLine().length > commandCheck.getParametrDefinitions().size()){
                    filedir  = OptionalInCommandLine();
                    file = filedir[0]; dir = filedir[1];
-                   setGetObject.setParams(name,phone,file,dir);
-                   return setGetObject;
+                   dataObjectWorking.setParams(name,phone,file,dir);
+                   return dataObjectWorking;
 
                } else{
                    filedir  =  NotOptionalInCommandLine();
                    file = filedir[0]; dir = filedir[1];
-                   setGetObject.setParams(name,phone,file,dir);
-                   return setGetObject;
+                   dataObjectWorking.setParams(name,phone,file,dir);
+                   return dataObjectWorking;
                }
             }
         }
-        return setGetObject;
+        return dataObjectWorking;
     }
 
     public String[] NotOptionalInCommandLine() throws DataFormatException{

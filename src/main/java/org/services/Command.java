@@ -1,10 +1,10 @@
 package org.services;
 
-import org.date.SetGetObject;
+import org.date.DataObjectWorking;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 public interface Command{
-    void execute(SetGetObject objectClass) throws IOException, IllegalAccessException, InstantiationException, InvocationTargetException;
+    void execute(DataObjectWorking objectClass) throws IOException, IllegalAccessException, InstantiationException, InvocationTargetException;
 }

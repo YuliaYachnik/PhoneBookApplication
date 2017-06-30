@@ -1,6 +1,6 @@
 package org.services.help;
 
-import org.date.SetGetObject;
+import org.date.DataObjectWorking;
 import org.services.Command;
 
 public class HelpCommandImpl implements Command {
@@ -12,36 +12,33 @@ public class HelpCommandImpl implements Command {
             "You can USE HELP-manager to help you work with application.\n\n" +
             "And now this is the syntax for invoking Command (You mast carefully assign Command in command line.)";
 
-    private String noticeFileAndDir = "\nNOTICE: If you specify only your own file, the directory will be default! " +
-            "You can't specify only your own directory without file.";
+    private String noticeFileAndDir = "\nNOTICE: If you specify your own file, then you also need to specify the directory!";
 
     private String addMessage = "\n\t\t\t ADD \t\t\t\n" +
             "With the help of this command, you can write to default file" +
             " data about the person (his name and his contact phone number):\n" +
-            "add --name='Name' --phone='12345'\n" +
+            "add --param1=Param1 --param2=Param2\n" +
             "With the help of this command, you can write to your own file" +
-            " data about the person (his name and his contact phone number):\n" +
-            "add --name='Name' --phone='12345' [--filename=exampleFile.txt] [--dirname='exampledir]";
+            "add --param1=Param1 --param2=Param2 [--filename=exampleFile.txt] [--dirname='exampledir]";
 
     private  String findMessage = "\n\t\t\t FIND \t\t\t\n" +
-            "With the help of this command, you can find phone number of any person by his name" +
+            "With the help of this command, you can find some information by Param1" +
             "in default file:\n" +
-            "find --name='Name'\n" +
-            "With the help of this command, you can find phone number of any person by his name" +
+            "find --param1=Param1\n" +
             "in your own file:\n" +
-            "find --name='Name'  [--filename=exampleFile.txt] [--dirname='exampledir]";
+            "find --param1=Param1[--filename=exampleFile.txt] [--dirname='exampledir]";
 
     private String listMessage = "\n\t\t\t LIST \t\t\t\n" +
-            "With the help of this command, you can view information about all persons in default file:\n" +
+            "With the help of this command, you can view all information in default file:\n" +
             "list \n" +
-            "With the help of this command, you can view information about all persons in your own file:\n" +
+            "in your own file:\n" +
             "list [--filename=exampleFile.txt] [--dirname='exampledir]";
 
     private  String helpMessage = "\n\t\t\t HELP \t\t\t\n" +
             "This help-manager give you some description and syntax of the application command:\n" +
             "help";
 
-    public void execute(SetGetObject objectClass) {
+    public void execute(DataObjectWorking objectClass) {
         System.out.println(messege);
         System.out.println(helpMessage);
         System.out.println(addMessage);

@@ -1,6 +1,6 @@
 package org;
 
-import org.date.SetGetObject;
+import org.date.DataObjectWorking;
 import org.services.CommandDefinition;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Map;
 public class PhoneBookApplicationBuilder {
     private List<CommandDefinition> commandDefinition =  new ArrayList<CommandDefinition>();
     private Map<String,String> params;
-    private SetGetObject objectClass;
+    private DataObjectWorking objectClass;
 
 
 
@@ -26,7 +26,7 @@ public class PhoneBookApplicationBuilder {
         return this;
     }
 
-    public PhoneBookApplicationBuilder forData(SetGetObject objectClass){
+    public PhoneBookApplicationBuilder forData(DataObjectWorking objectClass){
         this.objectClass = objectClass;
         return this;
     }

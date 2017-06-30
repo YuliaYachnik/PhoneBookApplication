@@ -1,6 +1,6 @@
 package org.date;
 
-public class PhoneBookData implements SetGetObject {
+public class PhoneBookData implements DataObjectWorking {
     private String name;
     private String phone;
     private String file;

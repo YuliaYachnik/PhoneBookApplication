@@ -1,7 +1,7 @@
 package org.date;
 
 
-public class HotelBookData implements SetGetObject  {
+public class HotelBookData implements DataObjectWorking {
     private String name;
     private String hotelName;
     private String fileName;

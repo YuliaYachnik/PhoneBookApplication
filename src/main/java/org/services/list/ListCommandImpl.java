@@ -1,15 +1,15 @@
 package org.services.list;
 
-import org.date.SetGetObject;
+import org.date.DataObjectWorking;
 import org.fileworking.FileWorker;
 import org.services.Command;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ListCommandImpl implements Command{
-    private ArrayList<SetGetObject> personListOut = new ArrayList<SetGetObject>();
+    private ArrayList<DataObjectWorking> personListOut = new ArrayList<DataObjectWorking>();
 
-    public void execute(SetGetObject objectClass) throws IOException{
+    public void execute(DataObjectWorking objectClass) throws IOException{
         FileWorker fileWorker = new FileWorker();
         personListOut = fileWorker.readFile(objectClass);
         if (personListOut.size() != 0) {
@@ -17,6 +17,6 @@ public class ListCommandImpl implements Command{
                 System.out.println(personListOut.get(i));
             }
         } else
-            System.out.println("No phoneBookData found! Please, use help-manager.");
+            System.out.println("No data found! Please, use help-manager.");
     }
 }

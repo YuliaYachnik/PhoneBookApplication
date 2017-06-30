@@ -1,6 +1,6 @@
 package org.fileworking;
 
-import org.date.SetGetObject;
+import org.date.DataObjectWorking;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class FileWorker {
     private String pass = "E:/";
 
-    public void writeFile(SetGetObject objectClass) throws IOException {
+    public void writeFile(DataObjectWorking objectClass) throws IOException {
        File folder = new File(pass + objectClass.getField4());
         if (!folder.exists()){
             folder.mkdir();
@@ -23,15 +23,15 @@ public class FileWorker {
         } finally {
                 bufferedWriter.close();
                 fileOutputStream.close();
-            System.out.println("Successful add to Phonebook");
+            System.out.println("Successful add to the directory");
         }
     }
 
-    public ArrayList<SetGetObject> readFile(SetGetObject objectClass) throws IOException{
+    public ArrayList<DataObjectWorking> readFile(DataObjectWorking objectClass) throws IOException{
         File folder = new File(pass + objectClass.getField4() + File.separator + objectClass.getField3());
         BufferedReader bufferedReader = new BufferedReader(new FileReader(folder));
         try {
-            ArrayList<SetGetObject> personList = new ArrayList<SetGetObject>();
+            ArrayList<DataObjectWorking> personList = new ArrayList<DataObjectWorking>();
             ArrayList<String> str = new ArrayList<String>();
             if (!folder.exists()) throw new FileNotFoundException();
             String buf;
@@ -48,11 +48,11 @@ public class FileWorker {
         }
     }
 
-   public ArrayList<SetGetObject> findInFile(SetGetObject objectClass) throws IOException{
+   public ArrayList<DataObjectWorking> findInFile(DataObjectWorking objectClass) throws IOException{
         File folder = new File(pass + objectClass.getField4() + File.separator + objectClass.getField3());
         BufferedReader bufferedReader = new BufferedReader(new FileReader(folder));
         try {
-            ArrayList<SetGetObject> personList = new ArrayList<SetGetObject>();
+            ArrayList<DataObjectWorking> personList = new ArrayList<DataObjectWorking>();
             ArrayList<String> str = new ArrayList<String>();
             if (!folder.exists()) throw new FileNotFoundException();
             String buf;

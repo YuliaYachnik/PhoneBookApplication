@@ -1,6 +1,6 @@
 package org.date;
 
-public class LibraryData implements SetGetObject{
+public class LibraryData implements DataObjectWorking {
     private String name;
     private String authorSurName;
     private String filename;

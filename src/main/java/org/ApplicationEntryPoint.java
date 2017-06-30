@@ -1,6 +1,6 @@
 package org;
 
-import org.date.SetGetObject;
+import org.date.DataObjectWorking;
 import org.services.CommandDefinition;
 import org.services.ParametrDefinitions;
 import org.services.add.AddCommandImpl;
@@ -15,16 +15,16 @@ public class ApplicationEntryPoint {
 
         Class command;
         Class objectClassPhoneBook = Class.forName("org.date.PhoneBookData");
-        SetGetObject bookObject  = (SetGetObject)objectClassPhoneBook.newInstance();
+        DataObjectWorking bookObject  = (DataObjectWorking)objectClassPhoneBook.newInstance();
 
         Class objectClassLibrary = Class.forName("org.date.LibraryData");
-        SetGetObject printLibraryObject = (SetGetObject)objectClassLibrary.newInstance();
+        DataObjectWorking printLibraryObject = (DataObjectWorking)objectClassLibrary.newInstance();
 
         Class objectClassHotel = Class.forName("org.date.HotelBookData");
-        SetGetObject printHotelObject = (SetGetObject)objectClassLibrary.newInstance();
+        DataObjectWorking printHotelObject = (DataObjectWorking)objectClassLibrary.newInstance();
 
-        ParametrDefinitions nameParametrDefinitions = new ParametrDefinitions("name",true);
-        ParametrDefinitions phoneParametrDefinitions = new ParametrDefinitions("phone",true);
+        ParametrDefinitions nameParametrDefinitions = new ParametrDefinitions("param1",true);
+        ParametrDefinitions phoneParametrDefinitions = new ParametrDefinitions("param2",true);
         ParametrDefinitions fileParametrDefinitions = new ParametrDefinitions("filename", false);
         ParametrDefinitions dirParametrDefinitions = new ParametrDefinitions("dirname",false);
 
@@ -34,8 +34,8 @@ public class ApplicationEntryPoint {
         List <ParametrDefinitions> helpParametrDefinitionsList = new ArrayList<>();
 
         Map<String,String>  matchOptionalParametrsWithDefaultValue = new HashMap<>();
-        matchOptionalParametrsWithDefaultValue.put("--filename","phonebook.txt");
-        matchOptionalParametrsWithDefaultValue.put("--dirname","phonebook");
+        matchOptionalParametrsWithDefaultValue.put("--filename","defaultFile.txt");
+        matchOptionalParametrsWithDefaultValue.put("--dirname","defaultdDir");
 
 
 

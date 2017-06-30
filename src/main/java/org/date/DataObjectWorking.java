@@ -1,6 +1,6 @@
 package org.date;
 
-public interface SetGetObject {
+public interface DataObjectWorking {
     void setParams(String str1, String str2, String str3, String str4);
     String getField1();
     String getField2();

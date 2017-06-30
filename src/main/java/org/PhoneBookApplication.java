@@ -1,7 +1,7 @@
 package org;
 
 import org.check.CheckManager;
-import org.date.SetGetObject;
+import org.date.DataObjectWorking;
 import org.services.*;
 
 import java.io.FileNotFoundException;
@@ -15,9 +15,9 @@ public class PhoneBookApplication {
     private List <CommandDefinition> commandDefinition;
     private Map<String,String> params;
     private Map <String,CommandDefinition> commandDefinitionMap;
-    private SetGetObject objectClass;
+    private DataObjectWorking objectClass;
 
-    public PhoneBookApplication(List <CommandDefinition> commandDefinition, Map<String, String> params,SetGetObject objectClass) {
+    public PhoneBookApplication(List <CommandDefinition> commandDefinition, Map<String, String> params,DataObjectWorking objectClass) {
             this.commandDefinition = commandDefinition;
             this.params = params;
             commandDefinitionMap = new HashMap<>();
